@@ -1,0 +1,73 @@
+@charset "UTF-8";
+* {
+  font-family: 微軟正黑體;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
+.navbar-brand img {
+  height: 40px;
+}
+
+#users {
+  margin-right: 10px;
+  color: white;
+}
+
+#login {
+  position: fixed;
+  top: 100px;
+  display: none;
+}
+
+#checkout {
+  margin-right: 10px;
+}
+
+.showlist {
+  position: fixed;
+  right: 0px;
+  display: none;
+  z-index: 10;
+}
+.showlist .container .row {
+  margin-bottom: 10px;
+}
+.showlist .container .row .name {
+  color: #0075C2;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: bold;
+}
+.showlist .container .row .qty {
+  color: #e44445;
+}
+.showlist .btn {
+  width: 92%;
+  margin: 0px 4%;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 15px;
+}
+
+footer {
+  text-align: center;
+  color: #FFF;
+  text-shadow: 0 0 15px #00D;
+  padding: 100px 0px;
+  background-image: url(https://image.freepik.com/free-photo/bar-magnet-with-iron-powder-magnetic-field_127345-195.jpg);
+  background-size: cover;
+  height: 300px;
+  background-attachment: fixed;
+}
+footer input {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+footer .bg-primary {
+  margin-top: 6px;
+  color: white;
+}

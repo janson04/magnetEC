@@ -1,0 +1,37 @@
+@charset "UTF-8";
+section#magnet_buytype {
+  padding: 20px 0px;
+  background-image: url("https://www.msmt.com.tw/images/common/index/index_bg.jpg");
+}
+section#magnet_buytype .list-group {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+section#magnet_buytype .col a {
+  text-decoration: none;
+}
+section#magnet_buytype .col a img {
+  transform: scale(1, 1);
+  transition: all 0.3s;
+}
+section#magnet_buytype .col a :hover img {
+  transform: scale(1.08, 1.08);
+  transition: all 0.3s;
+}
+section#magnet_buytype .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+section#magnet_buytype .card .card-body {
+  z-index: 5;
+}
+section#magnet_buytype .card .card-title {
+  color: #0075C2;
+  font-size: 1rem;
+}
+section#magnet_buytype .card .card-text {
+  color: #FF0000;
+  font-size: 1.2rem;
+}
+section#magnet_buytype .pageSelection {
+  margin-top: 20px;
+}

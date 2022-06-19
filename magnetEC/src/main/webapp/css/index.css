@@ -1,0 +1,47 @@
+@charset "UTF-8";
+.header {
+  padding: 100px 0px;
+  text-align: center;
+  background-image: url(https://image.freepik.com/free-photo/bar-magnet-with-iron-powder-magnetic-field_127345-195.jpg);
+  background-size: cover;
+  height: 400px;
+  background-attachment: fixed;
+  color: #FFF;
+  text-shadow: 0 0 15px #00B, 0 0 5px #0075C2;
+}
+
+section#story {
+  padding: 20px 0px;
+  background-color: #eee;
+}
+section#story .storyimg {
+  background-image: url(https://image.freepik.com/free-vector/hand-drawn-science-education-background_23-2148489766.jpg);
+  background-size: cover;
+}
+
+section#magnet_type {
+  padding: 20px 0px;
+  background-image: url(https://www.msmt.com.tw/images/common/index/index_bg.jpg);
+}
+section#magnet_type .img_wrap {
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+section#magnet_type img {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+section#magnet_type .col-sm-12 {
+  text-align: center;
+  padding: 10px 0px;
+}
+section#magnet_type h3 {
+  display: inline;
+}
+section#magnet_type p {
+  padding: 10px 0px 40px 0px;
+  font-size: 1.1rem;
+}
