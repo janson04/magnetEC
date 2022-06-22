@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>磁鐵購買</title>
+<title>磁鐵購買 - 磁鐵超市</title>
 
 <%-- 此頁CSS載入開始 --%>
 <link rel="stylesheet" href="css/product.css" type="text/css" />
@@ -17,13 +17,13 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.core.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.default.min.css'>
 <link rel="stylesheet" href="css/navfooter.css" type="text/css" />
-
+<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
 </head>
 <body>
-<jsp:include page="template/nav.html"></jsp:include>
+<jsp:include page="template/nav.jsp"></jsp:include>
 <%-- 開始 --%>
 
-<div class="header jumbotron"></div>
+<div class="header jumbotron" style="margin-top: 70px;"></div>
 <!--左方導覽+右方商品列表-->
 <section id="magnet_buytype">
   <div class="container">
@@ -78,7 +78,7 @@
         <div class="row">
           <div class="col-12 pageSelection">
             <nav aria-label="Page navigation">
-              <ul class="pagination justify-content-center">
+              <ul class="pagination justify-content-center" style="min-width: 350px;">
                 <c:if test="${page>1}"><li class="page-item"><a class="page-link" href="product?magnetType=${ param.magnetType }&page=${ page-1 }" aria-label="Previous"><span aria-hidden="true">«</span></a></li></c:if>
                 <c:forEach var="p" begin="1" end="${magnetShowMaxPage}">
                 	<li class="page-item"><a class="page-link" href="product?magnetType=${ param.magnetType }&page=${ p }">${ p }</a></li>

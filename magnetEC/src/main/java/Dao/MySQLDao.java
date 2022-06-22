@@ -58,7 +58,7 @@ public class MySQLDao {
         }catch(SQLException se){
             se.printStackTrace();
         }
-        System.out.println("Goodbye MySQL");
+        System.out.println("斷開資料庫!");
     }
     
     public static ResultSet executeQuery(String sqlCommand){

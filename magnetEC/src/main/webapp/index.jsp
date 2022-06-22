@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>磁之超市-磁鐵的行家</title>
+<title>磁鐵超市-磁鐵的行家</title>
 
 <%-- 此頁CSS載入開始 --%>
 <link rel="stylesheet" href="css/index.css" type="text/css" />
@@ -16,10 +16,10 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.core.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.default.min.css'>
 <link rel="stylesheet" href="css/navfooter.css" type="text/css" />
-
+<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
 </head>
 <body>
-<jsp:include page="template/nav.html"></jsp:include>
+<jsp:include page="template/nav.jsp"></jsp:include>
 <%-- 開始 --%>
 
 <div class="header jumbotron">

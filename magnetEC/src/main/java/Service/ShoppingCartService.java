@@ -31,10 +31,22 @@ public class ShoppingCartService {
             String productId=p.getProductId();
             if(shoppingMap.containsKey(productId)){
                 Corder_detail od=shoppingMap.get(productId);
-                od.setSingle_buynum(od.getSingle_buynum()+buynum);
+                
+                //檢查增加的數量是否會大於該Product的庫存，最多只能到最大庫存
+                if(od.getSingle_buynum()+buynum > p.getStock() ) {
+                	od.setSingle_buynum(p.getStock());
+                } else {
+                	od.setSingle_buynum(od.getSingle_buynum()+buynum);
+                }
             }else{
                 Corder_detail od=new Corder_detail(p);
-                od.setSingle_buynum(buynum);
+                
+                //檢查增加的數量是否會大於該Product的庫存，最多只能到最大庫存
+                if( buynum > p.getStock() ) {
+                	od.setSingle_buynum(p.getStock());
+                }else {
+                	od.setSingle_buynum(buynum);
+                }
                 shoppingMap.put(productId, od);
             }
         }
@@ -97,5 +109,10 @@ public class ShoppingCartService {
             total+=money;
         }
         return total;
+    }
+    
+    //購物車商品類別量
+    public int shoppingMapSize() {
+    	return shoppingMap.size();
     }
 }

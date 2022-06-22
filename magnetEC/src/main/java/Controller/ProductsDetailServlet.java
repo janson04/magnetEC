@@ -22,15 +22,13 @@ public class ProductsDetailServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Product p = null;
-		
-		p = new ProductDao().queryforProductId(request.getParameter("id"));
+		Product p = new ProductDao().queryforProductId(request.getParameter("id"));
 		
 		if(p == null) {
 			//如查詢不到該商品，則轉址至商品購買頁
 			response.sendRedirect("product?magnetType=all");
 		} else {
-			request.setAttribute("showProduct", p);
+			request.getSession().setAttribute("showProduct", p);
 			
 			//把英文簡稱轉換成全名
 			request.setAttribute("magnetTypeFullName",EnumProductFullName.valueOf(p.getCategory()).getFullName());

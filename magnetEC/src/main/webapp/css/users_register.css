@@ -1,0 +1,28 @@
+@charset "UTF-8";
+section#left_zone {
+  padding: 20px 0px;
+  background-image: url("https://www.msmt.com.tw/images/common/index/index_bg.jpg");
+}
+section#left_zone .list-group {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#registerpage {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  position: relative;
+  border: 1.5px solid #dee2e6;
+}
+
+hr {
+  margin: 12px 5px;
+}
+
+.previousPage {
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+.previousPage :hover {
+  color: #46A327;
+}

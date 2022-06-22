@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>明細</title>
+<title>${showProduct.productName} - 磁鐵超市</title>
 
 <%-- 此頁CSS載入開始 --%>
 <link rel="stylesheet" href="css/product_detail.css" type="text/css" />
@@ -17,11 +17,12 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.core.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.default.min.css'>
 <link rel="stylesheet" href="css/navfooter.css" type="text/css" />
-
+<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
 </head>
 <body>
-<jsp:include page="template/nav.html"></jsp:include>
+<jsp:include page="template/nav.jsp"></jsp:include>
 <%-- 開始 --%>
+
 
 <div class="header jumbotron" style="margin-top: 70px;"></div>
 <!--左方導覽+右方商品詳細資訊-->
@@ -84,14 +85,23 @@
               </div>
               <div class="col-10">
                 <div class="input-group">
-                  <button class="btn btn-outline-primary" type="button" onclick="getnum('-')">－</button>
-                  <input class="form-control" type="tel" value="1" name="num" id="num" onkeyup="chknum();"/>
-                  <button class="btn btn-outline-primary" type="button" onclick="getnum('+')">＋</button>
+                  <button class="btn btn-outline-primary" type="button" onclick="getnum('-')" <c:if test="${showProduct.stock <= 0}">disabled</c:if> >－</button>
+                  <input class="form-control" type="tel" 
+                  <c:choose>
+	                  <c:when test="${showProduct.stock <= 0}">
+	                  	value="0" 
+	                  </c:when>
+	                  <c:otherwise>
+	                  	value="1" 
+	                  </c:otherwise>
+                  </c:choose>
+                  name="num" id="num" onkeyup="chknum();" <c:if test="${showProduct.stock <= 0}">disabled</c:if> />
+                  <button class="btn btn-outline-primary" type="button" onclick="getnum('+')" <c:if test="${showProduct.stock <= 0}">disabled</c:if> >＋</button>
                 </div>
               </div>
             </div>
             <div class="row col">
-              <button class="addProduct btn btn-danger" type="button" onclick="addProduct()"><i class="fas fa-cart-plus">加入購物車</i></button>
+              <button class="addProduct btn btn-danger" type="button" onclick="addItemShoppingCart()" <c:if test="${showProduct.stock <= 0}">disabled</c:if> ><i class="fas fa-cart-plus">加入購物車</i></button>
             </div>
           </div>
         </div>
@@ -106,6 +116,7 @@
 </section>
 
 
+
 <%-- 結束 --%>
 <jsp:include page="template/footer.html"></jsp:include>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
@@ -116,6 +127,22 @@
 
 <%-- 此頁JS載入開始 --%>
 <script src="js/product_detail.js"></script>
+<script type="text/javascript">
+    function result(data,status){
+        $(".showlist").html(data);
+    }
+    
+    function addItemShoppingCart(){
+    	var num = $("#num").val();
+        $.post("template/ShoppingCart.jsp",{"productId":"${showProduct.productId}","num":num,"submit":"add"},result);
+        alertify.success('成功加入購物車！<br/>如要結帳請點右上角💰️');
+    }
+    
+    function removeItemShoppingCart(){
+         var num = $("#item").val();
+         $.post("template/ShoppingCart.jsp",{"item":num,"submit":"remove"},result);
+    }
+</script>
 <%-- 此頁JS載入結束 --%>
 
 </body>

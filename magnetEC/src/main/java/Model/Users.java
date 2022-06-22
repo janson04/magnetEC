@@ -1,7 +1,7 @@
 package Model;
 
 public class Users {
-    private String id;
+    private String users_id;
     private String users_name;
     private String users_password;
     private String name;
@@ -13,10 +13,10 @@ public class Users {
     public Users(){
     };
 
-    public Users(String id, String users_name, String users_password, String name, String photo, String email,
+    public Users(String users_id, String users_name, String users_password, String name, String photo, String email,
 			String postcode, String address) {
 		super();
-		this.id = id;
+		this.users_id = users_id;
 		this.users_name = users_name;
 		this.users_password = users_password;
 		this.name = name;
@@ -27,11 +27,11 @@ public class Users {
 	}
 
 	public String getId() {
-		return id;
+		return users_id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setId(String users_id) {
+		this.users_id = users_id;
 	}
 
 	public String getUsers_name() {

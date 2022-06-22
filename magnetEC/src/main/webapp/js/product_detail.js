@@ -90,6 +90,4 @@ function chknum(){
 	}
 }
 
-function addProduct(){
-	alert("加入購物車成功!");
-}
+
