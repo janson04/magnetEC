@@ -9,6 +9,7 @@ public interface ProductDaoImpl {
 	//R 讀取
 	    List<Product> queryAllList();
 	    List<Product> queryListforCategory(String category);
+	    Product queryforProductId(String productId);
 	    
 	//U 更新
 	    

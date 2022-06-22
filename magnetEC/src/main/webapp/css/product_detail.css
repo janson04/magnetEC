@@ -1,0 +1,101 @@
+@charset "UTF-8";
+section#magnet_buytype {
+  padding: 20px 0px;
+  background-image: url("https://www.msmt.com.tw/images/common/index/index_bg.jpg");
+}
+section#magnet_buytype .list-group {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.productDetail img {
+  width: 95%;
+  padding: 15px;
+  border: 3px solid #aaddff;
+  background-color: #fff;
+}
+.productDetail .productId {
+  color: #0075C2;
+  font-size: 16px;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  margin: 5px 0px;
+  margin-top: 10px;
+}
+.productDetail .productName {
+  color: #61370A;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  margin: 5px 0px;
+}
+.productDetail .price {
+  color: #CCDDFF;
+  background-color: #0075C2;
+  text-align: center;
+  font-size: 17px;
+  line-height: 32px;
+  padding: 0 16px;
+  border-radius: 16px;
+  max-width: 180px;
+  margin: 5px 0px;
+  margin-top: 10px;
+}
+.productDetail hr {
+  margin: 12px 5px;
+}
+.productDetail .introduction {
+  color: #878787;
+  letter-spacing: 1.4px;
+  line-height: 25px;
+  font-weight: 550;
+}
+.productDetail .input-group {
+  margin-bottom: 15px;
+  width: 60%;
+  max-width: 280px;
+  white-space: nowrap;
+}
+.productDetail .input-group span {
+  font-size: 15px;
+  font-weight: 550;
+  line-height: 38px;
+  letter-spacing: 5px;
+}
+.productDetail .input-group button {
+  color: #999;
+  border: 1px solid #DDD;
+}
+.productDetail #num {
+  color: #000;
+  text-align: center;
+  border-top: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+}
+.productDetail .addProduct {
+  width: 80%;
+  max-width: 300px;
+  line-height: 32px;
+  letter-spacing: 3px;
+  margin-left: 10px;
+}
+.productDetail .introHtmlName {
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  color: #60370a;
+}
+.productDetail .previousPage {
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+.productDetail .previousPage :hover {
+  color: #46A327;
+}
+
+.introHtml img {
+  width: 100% !important;
+  height: 100% !important;
+}

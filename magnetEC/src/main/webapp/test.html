@@ -3,55 +3,221 @@
 <head>
 <meta charset="UTF-8">
 <title>Test HTML</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.core.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.default.min.css'>
+<link rel="stylesheet" href="css/navfooter.css" type="text/css" />
+
+<link rel="stylesheet" href="css/product_detail.css" type="text/css" />
 </head>
 <body>
-<div style="text-align: center;"><strong><span style="color:#000000;"><span style="font-size:32px;">產品規格</span></span></strong></div>
 
-<ul>
-	<li><span style="font-size:18px;"><span style="font-family:微軟正黑體,cursive;"><span style="color:#000000;">尺寸：直徑5mm x 厚度2mm</span></span></span></li>
-	<li><span style="font-size:18px;"><span style="font-family:微軟正黑體,cursive;"><span style="color:#000000;">等級：ND-35&nbsp;</span></span></span><a href="#" target="_blank"><img alt="等級特性表" border="0" onmouseout="this.src='images/%E7%AD%89%E7%B4%9A%E7%89%B9%E6%80%A7%E8%A1%A8-Blue.png'" onmouseover="this.src='images/%E7%AD%89%E7%B4%9A%E7%89%B9%E6%80%A7%E8%A1%A8-Orange.png'" src="images/%E7%AD%89%E7%B4%9A%E7%89%B9%E6%80%A7%E8%A1%A8-Blue.png" /></a></li>
-	<li><span style="font-size:18px;"><span style="font-family:微軟正黑體,cursive;"><span style="color:#000000;">溫度：&lt;80℃</span></span></span></li>
-	<li><span style="font-size:18px;"><span style="font-family:微軟正黑體,cursive;"><span style="color:#000000;">表面鍍層：鍍鎳</span></span></span></li>
-	<li><span style="font-size:18px;"><span style="font-family:微軟正黑體,cursive;"><span style="color:#000000;"><span style="background-color:null;">表面磁力：約2800&plusmn;10%高斯</span></span></span></span><span style="font-size:14px;"><span style="font-family:微軟正黑體,cursive;"><span style="color:#000000;">&nbsp;(以實際量測為主)</span></span></span><span style="font-size:18px;"><span style="font-family:微軟正黑體,cursive;"><span style="color:#000000;"><span style="background-color:null;"></span></span></span></span><span style="font-size:18px;"><span style="font-family:微軟正黑體,cursive;"><span style="color:#e74c3c;"></span></span></span></li>
-	<li><span style="font-size:18px;">備註：<span style="color:#ff0000;">N極記號</span></span></li>
-</ul>
-
-<div class="editorstreditorstr">
-<p><span style="font-size:18px;"> <span style="color:#000000;"><span style="font-family:微軟正黑體,cursive;"> <span style="line-height: 24px;"><span color="#000000">►尚有更多未登錄規格，如有需要或特別訂製，歡迎來電</span></span></span></span><span style="line-height: 24px;"><span style="color:#000000;"><span color="#000000">洽詢。</span></span></span></span><br />
-&nbsp;</p>
-
-<p style="text-align: center;"><strong><span style="color:#000000;"><span style="font-size:32px;">磁化方向</span></span></strong></p>
-
-<p style="text-align: center;"><span style="font-size:18px;"><span style="font-family:微軟正黑體,cursive;"><span style="color:#000000;"><span style="line-height: 21px;"><span color="#0000ff"><span color="#ff0000"><img alt="" src="images/%E7%A3%81%E5%8C%96%E6%96%B9%E5%90%91%E7%A4%BA%E6%84%8F%E5%9C%96-%E5%9C%93%E5%BD%A2-%E5%8E%9A%E5%BA%A6.png" style="height: 736px; width: 800px;" /><span lang="EN-US" style="font-size:12.0pt"><span style="font-family:微軟正黑體,sans-serif"></span></span></span></span></span></span></span></span></p>
+<div class="header jumbotron"></div>
+<!--上方導覽列20220618 --開始---->
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" id="topnav">
+  <div class="container-fluid"><a class="navbar-brand" href="#"><img src="https://www.msmt.com.tw/images/common/logo.png" alt=""/></a>
+    <div class="collapse navbar-collapse mx-3" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">首頁</a></li>
+        <li class="nav-item"><a class="nav-link" href="#story">磁鐵歷史</a></li>
+        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">磁鐵介紹</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#ND">燒結釹鐵硼</a></li>
+            <li><a class="dropdown-item" href="#FE">鐵氧體磁鐵</a></li>
+            <li><a class="dropdown-item" href="#RM">軟性橡膠磁鐵</a></li>
+            <li><a class="dropdown-item" href="#SM">釤鈷磁鐵</a></li>
+            <li><a class="dropdown-item" href="#AL">鋁鎳鈷磁鐵</a></li>
+            <li><a class="dropdown-item" href="#PM">塑膠磁鐵</a></li>
+            <li><a class="dropdown-item" href="#MQ">黏結釹鐵硼</a></li>
+          </ul>
+          <li class="nav-item"><a class="nav-link" href="#story">磁鐵購買</a></li>
+        </li>
+      </ul>
+      <!--搜尋欄-->
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="搜尋" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div><span class="me-auto"></span>
+    <!--會員按鈕-->
+    <button class="btn btn-md btn-info my-2" id="users" type="button" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#login"><i class="fas fa-user"> 會 員</i></button>
+    <!--結帳按鈕-->
+    <button class="btn btn-md btn-danger my-2" id="checkout" type="button" data-bs-placement="bottom" title="點擊結帳" data-bs-toggle="modal" data-bs-target="#checkoutPage" aria-hidden="true"><i class="fas fa-shopping-cart"> 結 帳 </i></button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <!--購買清單(浮動)-->
+    <div class="showlist modal-body">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-4"><img src="https://www.msmt.com.tw/upload/2019092017015367wyv1.jpg" alt="" height="80px"/></div>
+              <div class="col-8">
+                <div class="row name">D5x2mmT-燒結釹鐵硼磁鐵</div>
+                <div class="row qty">數量  : 3</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4"><img src="https://www.msmt.com.tw/upload/201910141441278ojuq1.jpg" alt="" height="80px"/></div>
+              <div class="col-8">
+                <div class="row name">D6x12mmT-燒結釹鐵硼磁鐵</div>
+                <div class="row qty">NT$ 19</div>
+              </div>
+            </div>
+          </div>
+          <hr/>
+          <div class="row col">
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#checkoutPage">結帳</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<!--上方導覽列20220618 --結束---->
+<!--登入頁面 20220605更新-->
+<div class="modal fade" id="login">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--20220605-->
+        <h5 class="modal-title" id="exampleModalLabel">會員登入</h5>
+        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="col-form-label" for="recipient-name">帳號</label>
+            <input class="form-control" id="recipient-name" type="text"/>
+          </div>
+          <div class="mb-3">
+            <label class="col-form-label" for="message-text">密碼</label>
+            <input class="form-control" id="message-text" type="password"/>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-info" type="button">登入</button>
+        <button class="btn btn-warning" type="button">註冊</button>
+        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">關閉</button>
+      </div>
+    </div>
+  </div>
 </div>
-&nbsp;
-
-<div class="column full center">
-<p style="text-align: center"><strong><span style="color:#000000;"><span style="font-size:32px;">我們的特色 / Our Features</span></span></strong></p>
+<!--登入+非會員購買頁面 20220605-->
+<div class="modal fade" id="checkoutPage">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">結帳</h5>
+        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="fs-5 fw-bold mb-2">會員登入</div>
+        <div class="row col">
+          <form>
+            <div class="mb-3">
+              <label class="col-form-label" for="recipient-name">帳號</label>
+              <input class="form-control" id="recipient-name" type="text"/>
+            </div>
+            <div class="mb-3">
+              <label class="col-form-label" for="message-text">密碼</label>
+              <input class="form-control" id="message-text" type="password"/>
+            </div>
+            <div class="mb-3 text-center">
+              <button class="btn btn-info" type="button">登入</button>
+              <button class="btn btn-warning" type="button">註冊</button>
+            </div>
+          </form>
+        </div>
+        <hr/>
+        <div class="fs-5 fw-bold mb-2">非會員購買</div>
+        <div class="row col-6 mx-auto">
+          <button class="btn btn-success">非會員直接購買</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<div class="remote-row clearfix">
-<div class="column third center"><span style="color:#000000;"><i class="icon ion-ios-cog size-64"></i></span>
-
-<h3 style="margin-top:0;"><span style="color:#000000;">專業技術</span></h3>
-
-<p class="normal-txt"><span style="color:#000000;">提供各種關於磁鐵或磁氣的解決方案，讓我們的客戶都能得到最強而有力的支援。</span></p>
-</div>
-
-<div class="column third center"><span style="color:#000000;"><i class="icon ion-thumbsup size-64"></i></span>
-
-<h3 style="margin-top:0;"><span style="color:#000000;">品質至上</span></h3>
-
-<p class="normal-txt"><span style="color:#000000;">我們堅持以最高標準來看待我們的磁鐵，每批成品都會先經過嚴格的檢查與測試。</span></p>
-</div>
-
-<div class="column third center"><span style="color:#000000;"><i class="icon ion-android-favorite size-64"></i></span>
-
-<h3 style="margin-top:0;"><span style="color:#000000;">用心經營</span></h3>
-
-<p class="normal-txt"><span style="color:#000000;">提供各種磁鐵及磁氣保健產品的零售，秉持著一顆也賣的精神，用心服務客戶30餘年。</span></p>
-</div>
-</div>
+<div class="header jumbotron"></div>
+<!--左方導覽+右方商品詳細資訊-->
+<section id="magnet_buytype">
+  <div class="container">
+    <div class="row">
+      <!--左方導覽-->
+      <div class="col-3 d-none d-md-block">
+        <div class="list-group"><a class="list-group-item list-group-item-action active" aria-current="true">磁鐵購買</a><a class="list-group-item list-group-item-action" href="">1.燒結釹鐵硼</a><a class="list-group-item list-group-item-action" href="">2.鐵氧體磁鐵</a><a class="list-group-item list-group-item-action" href="">3.軟性橡膠磁鐵</a><a class="list-group-item list-group-item-action" href="">4.釤鈷磁鐵</a><a class="list-group-item list-group-item-action" href="">5.鋁鎳鈷磁鐵</a><a class="list-group-item list-group-item-action" href="">6.塑膠磁鐵</a><a class="list-group-item list-group-item-action disabled">7.黏結釹鐵硼<br />　(尚未開賣)</a></div>
+      </div>
+      <!--右方商品詳細資訊-->
+      <div class="col-12 col-md-9 productDetail">
+        <!--層次結構導航-->
+        <div class="row" data-0="transform: translateY(0px)" data-100="transform: translateY(18px)">
+          <div class="col">
+            <h5>
+              <nav style="--bs-breadcrumb-divider: '&gt;';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">首頁</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">磁鐵購買</li>
+                </ol>
+              </nav>
+            </h5>
+          </div>
+        </div>
+        <!--商品詳細頁-->
+        <div class="row">
+          <div class="col-12 col-lg-6">
+            <div class="row">
+              <div class="col"><img src="https://www.msmt.com.tw/upload/20200518112914fbfxp1.jpg" alt=""/></div>
+            </div>
+          </div>
+          <div class="col col-lg-6">
+            <div class="row">
+              <div class="col-12">
+                <div class="productId">ND--D000168</div>
+                <div class="productName">D15x4mmT-燒結釹鐵硼磁鐵</div>
+                <div class="price">優惠價 NT$ 39</div>
+              </div>
+            </div>
+            <hr/>
+            <div class="introduction">燒結釹鐵硼磁鐵俗稱超強力磁鐵，為目前磁石材質中磁力最強的。一般來說釹鐵硼磁石為了防止表面氧化，其表面通常都會鍍鎳，外觀看起來為銀色。</div>
+            <hr/>
+            <!--此處的#stock value從資料庫讀取-->
+            <div class="row">
+              <div class="col-2">
+                <input id="stock" type="hidden" name="stock" value="781"/>
+                <div class="input-group"><span>數量</span></div>
+              </div>
+              <div class="col-10">
+                <div class="input-group">
+                  <button class="btn btn-outline-primary" type="button" onclick="getnum('-')">－</button>
+                  <input class="form-control" type="tel" value="1" name="num" id="num" onkeyup="chknum();"/>
+                  <button class="btn btn-outline-primary" type="button" onclick="getnum('+')">＋</button>
+                </div>
+              </div>
+            </div>
+            <div class="row col">
+              <button class="addProduct btn btn-danger" type="button"><i class="fas fa-cart-plus">加入購物車</i></button>
+            </div>
+          </div>
+        </div>
+        <div class="introHtmlName">\ 商品介紹 /</div>
+        <hr/>
+        <div class="introHtml">HTML語法介紹</div>
+        <hr/>
+        <div class="row"><a class="previousPage" type="button" href="javascript:history.back();"><i class="fas fa-chevron-left"> 回磁鐵列表頁</i></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--下方結尾-->
+<footer class="jumbotron">
+  <div class="container">
+    <h2>想獲取更多磁鐵資訊嗎?</h2>
+    <input class="form-control" placeholder="Email"/>
+    <button class="btn bg-primary">訂閱</button>
+  </div>
+</footer>
 
 </body>
 </html>

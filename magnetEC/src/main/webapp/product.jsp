@@ -32,13 +32,14 @@
       <div class="col-3">
         <div class="list-group">
         	<a class="list-group-item list-group-item-action active" aria-current="true">磁鐵購買</a>
-        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='ND'}"> list-group-item-info</c:if>" href="">1.燒結釹鐵硼</a>
-        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='FE'}"> list-group-item-info</c:if>" href="">2.鐵氧體磁鐵</a>
-        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='RM'}"> list-group-item-info</c:if>" href="">3.軟性橡膠磁鐵</a>
-        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='SM'}"> list-group-item-info</c:if>" href="">4.釤鈷磁鐵</a>
-        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='AL'}"> list-group-item-info</c:if>" href="">5.鋁鎳鈷磁鐵</a>
-        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='PM'}"> list-group-item-info</c:if>" href="">6.塑膠磁鐵</a>
-        	<a class="list-group-item list-group-item-action disabled">7.黏結釹鐵硼<br />　(尚未開賣)</a></div>
+        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='ND'}"> list-group-item-info</c:if>" href="product?magnetType=ND&page=1">1.燒結釹鐵硼</a>
+        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='FE'}"> list-group-item-info</c:if>" href="product?magnetType=FE&page=1">2.鐵氧體磁鐵</a>
+        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='RM'}"> list-group-item-info</c:if>" href="product?magnetType=RM&page=1">3.軟性橡膠磁鐵</a>
+        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='SM'}"> list-group-item-info</c:if>" href="product?magnetType=SM&page=1">4.釤鈷磁鐵</a>
+        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='AL'}"> list-group-item-info</c:if>" href="product?magnetType=AL&page=1">5.鋁鎳鈷磁鐵</a>
+        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='PM'}"> list-group-item-info</c:if>" href="product?magnetType=PM&page=1">6.塑膠磁鐵</a>
+        	<a class="list-group-item list-group-item-action disabled" href="product?magnetType=MQ&page=1">7.黏結釹鐵硼<br />　(尚未開賣)</a>
+        </div>
       </div>
       <!--右方商品列表-->
       <div class="col-9">
@@ -52,8 +53,8 @@
                   <c:choose>
                   	<c:when test="${magnetType == 'all'}"><li class="breadcrumb-item active" aria-current="page">磁鐵購買</li></c:when>
                   	<c:otherwise>
-                  		<li class="breadcrumb-item" aria-current="page"><a href="product">磁鐵購買</a></li>
-                  		<li class="breadcrumb-item active" aria-current="page">${magnetTypeFullName }</li>
+                  		<li class="breadcrumb-item" aria-current="page"><a href="product?magnetType=all">磁鐵購買</a></li>
+                  		<li class="breadcrumb-item active" aria-current="page">${magnetTypeFullName}</li>
                   	</c:otherwise>
                   </c:choose>
                 </ol>
@@ -78,11 +79,11 @@
           <div class="col-12 pageSelection">
             <nav aria-label="Page navigation">
               <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="product?magnetType=${ param.magnetType }&page=${ page-1 }" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                <c:forEach var="p" begin="1" end="2">
+                <c:if test="${page>1}"><li class="page-item"><a class="page-link" href="product?magnetType=${ param.magnetType }&page=${ page-1 }" aria-label="Previous"><span aria-hidden="true">«</span></a></li></c:if>
+                <c:forEach var="p" begin="1" end="${magnetShowMaxPage}">
                 	<li class="page-item"><a class="page-link" href="product?magnetType=${ param.magnetType }&page=${ p }">${ p }</a></li>
                 </c:forEach>
-                <li class="page-item"><a class="page-link" href="product?magnetType=${ param.magnetType }&page=${ page+1 }" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                <c:if test="${page<magnetShowMaxPage}"><li class="page-item"><a class="page-link" href="product?magnetType=${ param.magnetType }&page=${ page+1 }" aria-label="Next"><span aria-hidden="true">»</span></a></li></c:if>
               </ul>
             </nav>
           </div>
@@ -91,11 +92,6 @@
     </div>
   </div>
 </section>
-<script type="text/javascript">
-$(windows).ready{
-	alert(${requestScope.magnetShowList})
-}
-</script>
 
 <%-- 結束 --%>
 <jsp:include page="template/footer.html"></jsp:include>

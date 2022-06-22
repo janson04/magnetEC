@@ -24,7 +24,12 @@ public class ProductDao implements ProductDaoImpl {
 //		for (Product p:l2) {
 //			System.out.println(p.toString());
 //		}
-		//queryListforCategory測試 --結束--
+		//queryListforProductId測試 --結束--
+		
+		//queryforProductId測試 --開始--
+//		Product p1 = new ProductDao().queryforProductId("ND-DS000004");
+//		System.out.println(p1.toString());
+		//queryforProductId測試 --結束--
 	}
 	
 	@Override
@@ -87,6 +92,36 @@ public class ProductDao implements ProductDaoImpl {
         MySQLDao.stop();
         
         return l;
+	}
+
+	@Override
+	public Product queryforProductId(String productId) {
+		Product p = null;
+		
+		MySQLDao.start();
+        if (MySQLDao.DB_ConnectionStatus) {
+            String sqltext="select * from product where productId='" + productId+"'";
+            ResultSet rs = MySQLDao.executeQuery(sqltext);
+            
+            try {
+                while(rs.next()){
+                	p = new Product();
+                	p.setProductId(rs.getString("productId"));
+                	p.setProductName(rs.getString("productName"));
+                	p.setCategory(rs.getString("category"));
+                	p.setPrice(rs.getInt("price"));
+                	p.setStock(rs.getInt("stock"));
+                	p.setImgurl(rs.getString("imgurl"));
+                	p.setIntroduction(rs.getString("introduction"));
+                	p.setIntroHtml(rs.getString("introHtml"));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        MySQLDao.stop();
+        
+        return p;
 	}
 
 }
