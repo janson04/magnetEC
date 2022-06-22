@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class MySQLDao { 
-    public static String DB_URL = "jdbc:mysql://locahost:3306/magnetec?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Taipei";
+    public static String DB_URL = "jdbc:mysql://localhost:3306/magnetec?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Taipei";
     public static boolean DB_ConnectionStatus=false;
  
     //資料庫的用戶名與密碼
@@ -33,7 +33,6 @@ public class MySQLDao {
             System.out.println("連接資料庫中...");
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
             
-            System.out.println("實體化Statement對象...");
             stmt = conn.createStatement();
             
             DB_ConnectionStatus = true;

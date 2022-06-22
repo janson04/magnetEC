@@ -34,6 +34,7 @@ public class Product {
         		", price=" + price +
         		", stock=" + stock +
         		", imgurl=" + imgurl +
+        		", introHtml=" + introHtml +
                 "]";
     }
     
