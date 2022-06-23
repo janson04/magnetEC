@@ -140,7 +140,7 @@
     
     function removeItemShoppingCart(){
          var num = $("#item").val();
-         $.post("template/ShoppingCart.jsp",{"item":num,"submit":"remove"},result);
+         $.post("template/ShoppingCart.jsp",{"productId":"${showProduct.productId}","item":num,"submit":"remove"},result);
     }
 </script>
 <%-- 此頁JS載入結束 --%>

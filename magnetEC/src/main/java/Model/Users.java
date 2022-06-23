@@ -5,32 +5,36 @@ public class Users {
     private String users_name;
     private String users_password;
     private String name;
-    private String photo;
+    private String phone;
     private String email;
+    private String city;
     private String postcode;
     private String address;
+    private String registerTime;
     
     public Users(){
     };
 
-    public Users(String users_id, String users_name, String users_password, String name, String photo, String email,
-			String postcode, String address) {
+	public Users(String users_id, String users_name, String users_password, String name, String phone, String email,
+			String city, String postcode, String address, String registerTime) {
 		super();
 		this.users_id = users_id;
 		this.users_name = users_name;
 		this.users_password = users_password;
 		this.name = name;
-		this.photo = photo;
+		this.phone = phone;
 		this.email = email;
+		this.city = city;
 		this.postcode = postcode;
 		this.address = address;
+		this.registerTime = registerTime;
 	}
 
-	public String getId() {
+	public String getUsers_id() {
 		return users_id;
 	}
 
-	public void setId(String users_id) {
+	public void setUsers_id(String users_id) {
 		this.users_id = users_id;
 	}
 
@@ -59,11 +63,11 @@ public class Users {
 	}
 
 	public String getPhoto() {
-		return photo;
+		return phone;
 	}
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setPhoto(String phone) {
+		this.phone = phone;
 	}
 
 	public String getEmail() {
@@ -72,6 +76,14 @@ public class Users {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getPostcode() {
@@ -89,5 +101,12 @@ public class Users {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-    
+
+	public String getRegisterTime() {
+		return registerTime;
+	}
+
+	public void setRegisterTime(String registerTime) {
+		this.registerTime = registerTime;
+	}
 }

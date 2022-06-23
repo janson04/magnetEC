@@ -7,12 +7,14 @@ import java.util.List;
 public interface UsersDaoImpl {
 
 //C 創建
-    void add(String username,String password, String name);
+	boolean add(String users_id,String users_password,String name, String photo
+    		,String email,String city,String postcode,String address
+    		,String registerTime);
     
 //R 讀取
     List<Users> queryAllList();
-    Users queryUsers(String username);
-    boolean queryIsUsername(String username);
+    Users queryUsers(String users_id);
+    boolean queryIsUserId(String users_id);
     
 //U 更新
     

@@ -44,7 +44,7 @@
             <h5>
               <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">首頁</a></li>
+                  <li class="breadcrumb-item"><a href="index.jsp">首頁</a></li>
                   <li class="breadcrumb-item"><a href="#">會員專區</a></li>
                   <li class="breadcrumb-item active" aria-current="page">會員註冊</li>
                 </ol>
@@ -58,47 +58,47 @@
           <div class="form-text text-center mb-3">為了提供您更完善的服務，請務必輸入正確的資料，謝謝您。</div>
         </div>
         <div class="container" id="registerpage">
-          <form class="row g-3 position-relative needs-validation" action="AA" onsubmit="return formcheck()" novalidate="">
+          <form class="row g-3 position-relative needs-validation" action="users_register" method="post" onsubmit="return formcheck()" novalidate="">
             <div class="col-lg-4 position-relative">
               <div class="row">
-                <label class="form-label" for="users_name"><span>帳號</span><span class="small text-danger"> (必填)</span></label>
+                <label class="form-label" for="users_id"><span>帳號</span><span class="small text-danger"> (必填)</span></label>
                 <div class="input-group has-validation"><span class="input-group-text">@</span>
-                  <input class="form-control" id="users_name" type="text" aria-describedby="請填寫一個帳號" required=""/>
-                  <div class="invalid-feedback">請輸入一組帳號</div>
+                  <input class="form-control" id="users_id" name="users_id" type="text" aria-describedby="請填寫一個帳號" required=""/>
+                  <div class="invalid-feedback">未輸入或發現重複的帳號</div>
                 </div>
               </div>
             </div>
             <div class="col-lg-4 position-relative">
               <label class="form-label" for="users_password"><span>密碼</span><span class="small text-danger"> (必填)</span></label>
-              <input class="form-control" id="users_password" type="password" value="" placeholder="8碼英文+數字" pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$" required=""/>
+              <input class="form-control" id="users_password" name="users_password" type="password" value="" placeholder="8碼英文+數字" pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$" required=""/>
               <div class="invalid-feedback">密碼需英文+數字，且至少八碼以上</div>
             </div>
             <div class="col-lg-4 position-relative">
               <label class="form-label" for="checkpassword"><span>確認密碼</span><span class="small text-danger"> (必填)</span></label>
-              <input class="form-control" id="checkpassword" type="password" pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$" required=""/>
+              <input class="form-control" id="checkpassword" name="checkpassword" type="password" pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$" required=""/>
               <div class="valid-feedback" id="valid-checkpassword">確認成功</div>
               <div class="invalid-feedback">確認密碼不符，請重新輸入</div>
             </div>
             <div class="col-lg-3 position-relative">
               <label class="form-label" for="name"><span>姓名</span><span class="small text-danger"> (必填)</span></label>
-              <input class="form-control" id="name" type="text" value="" required=""/>
+              <input class="form-control" id="name" name="name" type="text" value="" required=""/>
               <div class="invalid-feedback">請輸入姓名</div>
             </div>
             <div class="col-lg-4 position-relative">
               <label class="form-label" for="phone"><span>手機</span><span class="small text-danger"> (必填)</span></label>
-              <input class="form-control" id="phone" type="text" value="" pattern="^[0][9][0-9]{8}$" required=""/>
+              <input class="form-control" id="phone" name="phone" type="text" value="" pattern="^[0][9][0-9]{8}$" required=""/>
               <div class="valid-feedback">輸入正確</div>
               <div class="invalid-feedback">請輸入正確的手機號碼</div>
             </div>
             <div class="col-lg-5 position-relative">
               <label class="form-label" for="email">Email</label>
-              <input class="form-control" id="email" type="email" value=""/>
+              <input class="form-control" id="email" name="email" type="email" value=""/>
               <div class="valid-feedback">輸入正確</div>
               <div class="invalid-feedback">請輸入正確的Email</div>
             </div>
             <div class="col-lg-3 position-relative">
               <label class="form-label" for="city">縣市</label>
-              <select class="form-select" id="city" aria-describedby="請選擇縣市">
+              <select class="form-select" id="city" name="city" aria-describedby="請選擇縣市">
                 <option selected="" disabled="" value="">請選擇</option>
                 <option>台北市</option>
                 <option>新北市</option>
@@ -125,12 +125,12 @@
             </div>
             <div class="col-lg-3 position-relative">
               <label class="form-label" for="postcode">郵遞區號</label>
-              <input class="form-control" id="postcode" type="tel" aria-describedby="請輸入郵遞區號" pattern="[0-9]{3,6}"/>
+              <input class="form-control" id="postcode" name="postcode" type="tel" aria-describedby="請輸入郵遞區號" pattern="[0-9]{3,6}"/>
               <div class="invalid-feedback">請輸入正確的郵遞區號</div>
             </div>
             <div class="col-lg-6 position-relative">
               <label class="form-label" for="address">送貨地址</label>
-              <input class="form-control" id="address" type="text" aria-describedby="請輸入送貨地址"/>
+              <input class="form-control" id="address" name="address" type="text" aria-describedby="請輸入送貨地址"/>
               <div class="invalid-feedback" id="validationServer03Feedback">請輸入正確的地址</div>
             </div>
             <div class="col-12 position-relative">
@@ -167,6 +167,28 @@
 
 <%-- 此頁JS載入開始 --%>
 <script src="js/users_register.js"></script>
+<script type="text/javascript">
+	function result(data,status){
+		//alert(data);
+	    if(data == "true"){
+	    	alertify.error("發現帳號重複，請輸入其它帳號");
+
+	    	$("#users_id").removeClass("is-valid");
+	    	$("#users_id").addClass("is-invalid");
+		}else{
+			$("#users_id").removeClass("is-invalid");
+			if($("#users_id").val().length>0){
+				$("#users_id").addClass("is-valid");
+			}
+		}
+	}
+	//確認帳號
+	$("#users_id").keyup(function checkUsersId(){
+		var users_id = $("#users_id").val();
+	    $.post("rest/checkUsersId",{"users_id": users_id},result);
+	});
+	
+</script>
 <%-- 此頁JS載入結束 --%>
 
 </body>
