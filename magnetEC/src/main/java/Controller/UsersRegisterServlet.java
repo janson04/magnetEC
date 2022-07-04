@@ -24,6 +24,8 @@ public class UsersRegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		boolean addSuccess = false;
 		
+		request.setCharacterEncoding("UTF-8");
+		
 		//如果users_id已經存在資料庫，則回傳失敗
 		String users_id = request.getParameter("users_id");
 		System.out.println(users_id);
@@ -38,6 +40,14 @@ public class UsersRegisterServlet extends HttpServlet {
 			String postcode = request.getParameter("postcode");
 			String address = request.getParameter("address");
 			String registerTime = LocalDateTime.now().toString();
+			System.out.println(users_id
+					+"\t"+name
+					+"\t"+phone
+					+"\t"+email
+					+"\t"+city
+					+"\t"+postcode
+					+"\t"+address
+					+"\t"+registerTime);
 			
 			addSuccess= new UsersDao().add(users_id, users_password, name,
 					phone, email, city, postcode, address, registerTime);

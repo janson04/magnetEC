@@ -24,4 +24,17 @@ public class UsersService {
         System.out.println("users_id: "+users_id+"\tCheck: "+IsUsersid);
         return String.valueOf(IsUsersid);
     }
+	
+	@POST
+    @Path("/login.do")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String Login(@FormParam("users_id") String users_id) {
+		boolean IsUsersid = false;
+		if (users_id != null) {
+			IsUsersid= new UsersDao().queryIsUserId(users_id);
+		}
+        System.out.println("users_id: "+users_id+"\tCheck: "+IsUsersid);
+        return String.valueOf(IsUsersid);
+    }
 }

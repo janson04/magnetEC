@@ -14,10 +14,16 @@ import java.util.logging.Logger;
 
 
 public class UsersDao implements UsersDaoImpl{
+    public static void main(String[] args) {
+    	//add() 測試
+//    	new UsersDao().add("ID","a12345678","測試名稱","0935123456","","","","","");
+	}
+    
     
     //R 讀取
     @Override
     public List<Users> queryAllList() {
+    	// TODO : 修改
         MySQLDao.start();
         List<Users> l = new ArrayList<>();
         if (MySQLDao.DB_ConnectionStatus) {
@@ -53,7 +59,6 @@ public class UsersDao implements UsersDaoImpl{
     public Users queryUsers(String users_id) {
         MySQLDao.start();
         Users u=new Users();
-        List<Users> l = new ArrayList<>();
         if (MySQLDao.DB_ConnectionStatus) {
             String sqltext="SELECT * FROM `users` WHERE users_name=\'"+users_id+"\'";
             ResultSet rs = MySQLDao.executeQuery(sqltext);
@@ -111,6 +116,7 @@ public class UsersDao implements UsersDaoImpl{
         			+ "VALUES(?,?,?,?,?,?,?,?,?)";
             try {
                 PreparedStatement ps = conn.prepareStatement(sqltext);
+                
                 ps.setString(1, users_id);
                 ps.setString(2, users_password);
                 ps.setString(3, name);

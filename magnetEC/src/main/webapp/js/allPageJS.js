@@ -6,6 +6,8 @@ $(document).ready(function (){
   }
 })
 
+$(".header").css("margin-top" , parseInt($("#topnav").css("height")) + 0 + "px");
+
 //視窗大小改變時執行
 $(window).resize(function(){
   $(".showlist").css("top" , parseInt($("#topnav").css("height")) -25 + "px");

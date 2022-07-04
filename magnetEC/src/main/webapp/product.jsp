@@ -96,7 +96,7 @@
 <%-- 結束 --%>
 <jsp:include page="template/footer.html"></jsp:include>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
-<script src='https://cdn.bootcdn.net/ajax/libs/skrollr/0.6.9/skrollr.min.js'></script>
+<script src='https://cdn.bootcdn.net/ajax/libs/skrollr/0.6.30/skrollr.min.js'></script>
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.min.js'></script>
 <script src="js/allPageJS.js"></script>
