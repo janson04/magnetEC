@@ -1,8 +1,8 @@
-package Dao;
+package dao;
 
 import java.util.List;
 
-import Model.Corder_detail;
+import model.Corder_detail;
 
 interface Corder_detailDaoImpl {
     

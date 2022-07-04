@@ -1,7 +1,7 @@
-package Dao;
+package dao;
 
-import static Dao.MySQLDao.conn;
-import Model.Corder_detail;
+import static dao.MySQLDao.conn;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import model.Corder_detail;
 
 public class Corder_detailDao implements Corder_detailDaoImpl {
     
@@ -46,7 +48,7 @@ public class Corder_detailDao implements Corder_detailDaoImpl {
             
             try {
                 while(rs.next()){
-                    l.add(new Model.Corder_detail(
+                    l.add(new model.Corder_detail(
                             rs.getInt("id"),
                             rs.getString("corder_Id"),
                             rs.getString("product_Id"),

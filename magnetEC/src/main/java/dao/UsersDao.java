@@ -1,8 +1,6 @@
-package Dao;
+package dao;
 
-import Model.Users;
-
-import static Dao.MySQLDao.conn;
+import static dao.MySQLDao.conn;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import model.Users;
 
 
 public class UsersDao implements UsersDaoImpl{
@@ -32,7 +32,7 @@ public class UsersDao implements UsersDaoImpl{
             
             try {
                 while(rs.next()){
-                    l.add(new Model.Users(
+                    l.add(new model.Users(
                     		rs.getString("users_id"),
                             rs.getString("users_name"),
                             rs.getString("users_password"),

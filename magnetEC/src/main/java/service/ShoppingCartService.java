@@ -1,11 +1,12 @@
-package Service;
+package service;
 
-import Model.Product;
-import Model.Corder_detail;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import model.Corder_detail;
+import model.Product;
 
 //購物車
 public class ShoppingCartService {

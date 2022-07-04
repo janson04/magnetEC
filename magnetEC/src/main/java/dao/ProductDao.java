@@ -1,4 +1,4 @@
-package Dao;
+package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import Model.Product;
+import model.Product;
 
 public class ProductDao implements ProductDaoImpl {
 	public static void main(String[] args) {

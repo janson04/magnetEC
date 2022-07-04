@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import Dao.ProductDao;
-import Model.EnumProductFullName;
-import Model.Product;
+import dao.ProductDao;
+import model.EnumProductFullName;
+import model.Product;
 
 @WebServlet("/product")
 public class ProductServlet extends HttpServlet {

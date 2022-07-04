@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Dao.ProductDao;
-import Model.EnumProductFullName;
-import Model.Product;
+import dao.ProductDao;
+import model.EnumProductFullName;
+import model.Product;
 
 @WebServlet("/products_detail")
 public class ProductsDetailServlet extends HttpServlet {

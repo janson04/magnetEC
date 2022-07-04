@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 //磁鐵材質縮寫對應的中文名稱
 public enum EnumProductFullName {

@@ -1,7 +1,8 @@
-package Dao;
+package dao;
 
 import java.util.List;
-import Model.Product;
+
+import model.Product;
 
 public interface ProductDaoImpl {
 	//C 創建

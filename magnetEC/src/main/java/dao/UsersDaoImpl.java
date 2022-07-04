@@ -1,7 +1,8 @@
-package Dao;
+package dao;
 
-import Model.Users;
 import java.util.List;
+
+import model.Users;
 
 
 public interface UsersDaoImpl {

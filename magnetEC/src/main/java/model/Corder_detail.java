@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 //訂單明細，還未是訂單時，是購物車的單筆項目
 public class Corder_detail {
