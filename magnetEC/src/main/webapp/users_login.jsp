@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+	// 判斷是否已經登入，已經登入過則跳過登入頁面，直接顯示登入成功
+	if (service.UsersService.isLogin(request)) {
+		// 跳轉至成功登入頁面
+		response.sendRedirect("users_login_ok.jsp");
+		return;
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +32,7 @@
 <%-- 開始 --%>
 
 <div class="header jumbotron"></div>
-<!--左方導覽+右方商品詳細資訊-->
+<!--左方導覽+右方會員登入-->
 <section id="left_zone">
   <div class="container">
     <div class="row">
@@ -59,11 +67,12 @@
           <div class="form-text text-center mb-3">為了提供您更完善的服務，請登入會員，謝謝您。</div>
           <div class="container" id="loginpage">
             <div class="row col-8 col-lg-6 mx-auto">
-              <form action="login.do" method="post">
+              <div class="col-12 text-center text-danger">${loginfailMessage }</div>
+              <form action="login.do?action=login" method="post">
                 <div class="my-3 row gx-1">
                   <label class="fw-bold col-sm-2 col-form-label" for="inputID">帳號</label>
                   <div class="col-sm-10">
-                    <input class="form-control" id="inputID" name="inputID" type="text" placeholder="User ID"/>
+                    <input class="form-control" id="inputID" name="inputID" type="text" placeholder="User ID" value='${ID}'/>
                   </div>
                 </div>
                 <div class="my-3 row gx-1">
@@ -77,7 +86,7 @@
                     <button class="btn btn-info" type="submit">　登入　</button>
                   </div>
                   <div class="col">
-                    <button class="btn btn-warning" type="button">　註冊　</button>
+                    <button class="btn btn-warning" type="button" onclick="location.href='users_register.jsp'">　註冊　</button>
                   </div>
                 </div>
               </form>
@@ -99,28 +108,6 @@
 
 <%-- 此頁JS載入開始 --%>
 <%-- <script src="js/users_register.js"></script> --%>
-<script type="text/javascript">
-	function result(data,status){
-		//alert(data);
-	    if(data == "true"){
-	    	alertify.error("發現帳號重複，請輸入其它帳號");
-
-	    	$("#users_id").removeClass("is-valid");
-	    	$("#users_id").addClass("is-invalid");
-		}else{
-			$("#users_id").removeClass("is-invalid");
-			if($("#users_id").val().length>0){
-				$("#users_id").addClass("is-valid");
-			}
-		}
-	}
-	//確認帳號
-	$("#users_id").keyup(function checkUsersId(){
-		var users_id = $("#users_id").val();
-	    $.post("rest/checkUsersId",{"users_id": users_id},result);
-	});
-	
-</script>
 <%-- 此頁JS載入結束 --%>
 
 </body>

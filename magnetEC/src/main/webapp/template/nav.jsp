@@ -92,7 +92,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-info" type="button">登入</button>
+        <button class="btn btn-info" type="button" onclick="">登入</button>
         <button class="btn btn-warning" type="button">註冊</button>
         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">關閉</button>
       </div>

@@ -58,24 +58,27 @@ public class UsersDao implements UsersDaoImpl{
     @Override
     public Users queryUsers(String users_id) {
         MySQLDao.start();
-        Users u=new Users();
+        Users u=null;
         if (MySQLDao.DB_ConnectionStatus) {
-            String sqltext="SELECT * FROM `users` WHERE users_name=\'"+users_id+"\'";
+            String sqltext="SELECT * FROM `users` WHERE users_id=\'"+users_id+"\'";
             ResultSet rs = MySQLDao.executeQuery(sqltext);
             try {
-                if (rs.next()){
-                	u.setUsers_id(rs.getString("users_id"));
-                    u.setUsers_password(rs.getString("users_password"));
-                    u.setName(rs.getString("name"));
-                    u.setPhoto(rs.getString("phone"));
-                    u.setEmail(rs.getString("email"));
-                    u.setCity(rs.getString("city"));
-                    u.setPostcode(rs.getString("postcode"));
-                    u.setAddress(rs.getString("address"));
-                    u.setRegisterTime(rs.getString("registerTime"));
+                if (rs != null){                	
+                	if (rs.next()) {
+                		u=new Users();
+                    	u.setUsers_id(rs.getString("users_id"));
+                        u.setUsers_password(rs.getString("users_password"));
+                        u.setName(rs.getString("name"));
+                        u.setPhoto(rs.getString("phone"));
+                        u.setEmail(rs.getString("email"));
+                        u.setCity(rs.getString("city"));
+                        u.setPostcode(rs.getString("postcode"));
+                        u.setAddress(rs.getString("address"));
+                        u.setRegisterTime(rs.getString("registerTime"));
+                	}
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("UsersDao queryUsers Error: "+ex.getMessage());
             }
         }
         MySQLDao.stop();
