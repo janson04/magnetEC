@@ -18,6 +18,7 @@ public interface UsersDaoImpl {
     boolean queryIsUserId(String users_id);
     
 //U 更新
+	boolean updateUsersNotPasswordTime(Users user);
     
 //D 刪除
 }

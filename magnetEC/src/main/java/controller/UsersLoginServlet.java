@@ -81,8 +81,10 @@ public class UsersLoginServlet extends HttpServlet {
 			// 沒登入過，但帳號密碼正確(loginVerificationOK=true)，則設定相關Session與Cookie
 			ssid = service.UsersService.calSsidMd5(id + service.UsersService.KEY, logTime);
 			
-			//設定Session的ssid值，代表已經登入
+			//設定Session的ssid值和user值，代表已經登入
 			request.getSession().setAttribute("ssid", ssid);
+			request.getSession().setAttribute("user", new dao.UsersDao().queryUsers(id) );
+			System.out.println("成功登入: ssid & user 設定Session完成");
 			
 			Cookie IDCookie = new Cookie("ID", id); // 新增Cookie
 			IDCookie.setMaxAge(timeout); 		// 設定Cookie的失效時間長度
@@ -102,10 +104,11 @@ public class UsersLoginServlet extends HttpServlet {
 
 			return;
 		} else if ("logout".equals(action)) {
-			//如果是
+			//如果action是logout，直接登出
 			
-			//清出Session的ssid值，代表已經登出
+			//清出Session的ssid值/user值，代表已經登出
 			request.getSession().removeAttribute("ssid");
+			request.getSession().removeAttribute("user");
 			
 			Cookie IDCookie = new Cookie("ID", ""); // 新增Cookie
 			IDCookie.setMaxAge(0); 				// 設定失效時間長度為0 => 刪除

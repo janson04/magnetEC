@@ -2,8 +2,12 @@
     pageEncoding="UTF-8"
     import="service.ShoppingCartService"
     %>
-
-<!--上方導覽列20220618 --開始---->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+	// 判斷是否已經登入，沒有的話讀取Cookie判斷是否已經登入
+	service.UsersService.isLogin(request);
+%>
+<!--上方導覽列20220618:開始 -->
 <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" id="topnav">
   <div class="container-fluid"><a class="navbar-brand" href="index.jsp"><img src="https://www.msmt.com.tw/images/common/logo.png" alt=""/></a>
     <div class="collapse navbar-collapse mx-3" id="navbarSupportedContent">
@@ -29,8 +33,16 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div><span class="me-auto"></span>
-    <!--會員按鈕-->
-    <button class="btn btn-md btn-info my-2" id="users" type="button" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#login"><i class="fas fa-user"> 會 員</i></button>
+    <!--會員按鈕:開始-->
+    <c:choose>
+	   	<c:when test="${empty sessionScope.ssid}">
+    		<button class="btn btn-md btn-info my-2" id="users" type="button" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#login"><i class="fas fa-user"> 會 員</i></button>
+	   	</c:when>
+	   	<c:otherwise>
+	   		<button class="btn btn-md btn-info my-2" id="users" type="button" data-bs-placement="bottom" data-bs-toggle="modal" onclick="location.href='users_edit.jsp';"><i class="fas fa-user"> 會 員</i></button>
+	   	</c:otherwise>
+    </c:choose>
+    <!--會員按鈕:結束-->
     <!--結帳按鈕-->
     <button class="btn btn-md btn-danger my-2" id="checkout" type="button" data-bs-placement="bottom" title="點擊結帳" data-bs-toggle="modal" data-bs-target="#checkoutPage" aria-hidden="true">
     <i class="fas fa-shopping-cart"><span> 結 帳 </span><span>${ShoppingCart.shoppingMapSize()}</span></i></button>
@@ -69,7 +81,7 @@
     </div>
   </div>
 </nav>
-<!--上方導覽列20220618 --結束---->
+<!-- 上方導覽列20220618:結束 -->
 <!--登入頁面 20220605更新-->
 <div class="modal fade" id="login">
   <div class="modal-dialog">
@@ -80,20 +92,20 @@
         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="loginform1" action="/magnetEC/login.do?action=login" method="post">
           <div class="mb-3">
             <label class="col-form-label" for="recipient-name">帳號</label>
-            <input class="form-control" id="recipient-name" type="text"/>
+            <input class="form-control" id="recipient-name" type="text" name="inputID"/>
           </div>
           <div class="mb-3">
             <label class="col-form-label" for="message-text">密碼</label>
-            <input class="form-control" id="message-text" type="password"/>
+            <input class="form-control" id="message-text" type="password" name="inputPassword"/>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-info" type="button" onclick="">登入</button>
-        <button class="btn btn-warning" type="button">註冊</button>
+        <button class="btn btn-info" type="submit" form="loginform1">登入</button>
+        <button class="btn btn-warning" type="button" onclick="location.href='users_register.jsp';">註冊</button>
         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">關閉</button>
       </div>
     </div>
@@ -110,18 +122,18 @@
       <div class="modal-body">
         <div class="fs-5 fw-bold mb-2">會員登入</div>
         <div class="row col">
-          <form>
+          <form id="loginform2" action="/magnetEC/login.do?action=login" method="post">
             <div class="mb-3">
               <label class="col-form-label" for="recipient-name">帳號</label>
-              <input class="form-control" id="recipient-name" type="text"/>
+              <input class="form-control" id="recipient-name" type="text" name="inputID"/>
             </div>
             <div class="mb-3">
               <label class="col-form-label" for="message-text">密碼</label>
-              <input class="form-control" id="message-text" type="password"/>
+              <input class="form-control" id="message-text" type="password" name="inputPassword"/>
             </div>
             <div class="mb-3 text-center">
-              <button class="btn btn-info" type="button">登入</button>
-              <button class="btn btn-warning" type="button">註冊</button>
+              <button class="btn btn-info" type="submit" form="loginform2">登入</button>
+              <button class="btn btn-warning" type="button" onclick="location.href='users_register.jsp';">註冊</button>
             </div>
           </form>
         </div>

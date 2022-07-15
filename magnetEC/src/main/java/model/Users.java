@@ -2,7 +2,6 @@ package model;
 
 public class Users {
     private String users_id;
-    private String users_name;
     private String users_password;
     private String name;
     private String phone;
@@ -15,11 +14,10 @@ public class Users {
     public Users(){
     };
 
-	public Users(String users_id, String users_name, String users_password, String name, String phone, String email,
+	public Users(String users_id, String users_password, String name, String phone, String email,
 			String city, String postcode, String address, String registerTime) {
 		super();
 		this.users_id = users_id;
-		this.users_name = users_name;
 		this.users_password = users_password;
 		this.name = name;
 		this.phone = phone;
@@ -38,14 +36,6 @@ public class Users {
 		this.users_id = users_id;
 	}
 
-	public String getUsers_name() {
-		return users_name;
-	}
-
-	public void setUsers_name(String users_name) {
-		this.users_name = users_name;
-	}
-
 	public String getUsers_password() {
 		return users_password;
 	}
@@ -62,11 +52,11 @@ public class Users {
 		this.name = name;
 	}
 
-	public String getPhoto() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhoto(String phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -108,5 +98,16 @@ public class Users {
 
 	public void setRegisterTime(String registerTime) {
 		this.registerTime = registerTime;
+	}
+	
+	public String toString() {
+		return users_id
+				+"\t"+name
+				+"\t"+phone
+				+"\t"+email
+				+"\t"+city
+				+"\t"+postcode
+				+"\t"+address
+				+"\t"+registerTime;
 	}
 }

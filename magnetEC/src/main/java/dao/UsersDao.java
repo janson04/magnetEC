@@ -34,7 +34,6 @@ public class UsersDao implements UsersDaoImpl{
                 while(rs.next()){
                     l.add(new model.Users(
                     		rs.getString("users_id"),
-                            rs.getString("users_name"),
                             rs.getString("users_password"),
                             rs.getString("name"),
                             rs.getString("phone"),
@@ -69,7 +68,7 @@ public class UsersDao implements UsersDaoImpl{
                     	u.setUsers_id(rs.getString("users_id"));
                         u.setUsers_password(rs.getString("users_password"));
                         u.setName(rs.getString("name"));
-                        u.setPhoto(rs.getString("phone"));
+                        u.setPhone(rs.getString("phone"));
                         u.setEmail(rs.getString("email"));
                         u.setCity(rs.getString("city"));
                         u.setPostcode(rs.getString("postcode"));
@@ -145,6 +144,49 @@ public class UsersDao implements UsersDaoImpl{
         }
         MySQLDao.stop();
         return addSuccess;
-    }  
+    }
+
+
+	@Override
+	public boolean updateUsersNotPasswordTime(Users user) {
+		boolean updateSuccess=false;
+		
+		MySQLDao.start();
+        if (MySQLDao.DB_ConnectionStatus) {
+        	int runline = 0;
+        	String sqltext="UPDATE users SET "
+        			+ "name = ? , phone = ? ,"
+        			+ "email = ? , city = ? ,"
+        			+ "postcode = ? ,address = ? "
+        			+ "WHERE users_id = ?";
+            try {
+                PreparedStatement ps = conn.prepareStatement(sqltext);
+                
+//                ps.setString(1, user.getUsers_password());
+                ps.setString(1, user.getName());
+                ps.setString(2, user.getPhone());
+                ps.setString(3, user.getEmail());
+                ps.setString(4, user.getCity());
+                ps.setString(5, user.getPostcode());
+                ps.setString(6, user.getAddress());
+//                ps.setString(8, user.getRegisterTime());
+                ps.setString(7, user.getUsers_id());
+
+                runline = ps.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(Corder_detailDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            if(runline > 0){
+                System.out.println("帳號更新資料成功");
+                updateSuccess = true;
+            }else{
+                System.out.println("帳號更新資料失敗");
+                updateSuccess = false;
+            }
+        }
+        MySQLDao.stop();
+        return updateSuccess;
+	}  
 
 }

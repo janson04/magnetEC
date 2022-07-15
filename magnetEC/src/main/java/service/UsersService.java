@@ -57,7 +57,9 @@ public class UsersService {
 		
 		HttpSession session = request.getSession();
 		//如果Session有ssid代表已經登入過
-        if(session.getAttribute("ssid") != null) {
+        if(session.getAttribute("ssid") != null && session.getAttribute("user") != null) {
+//        	System.out.println(session.getAttribute("ssid"));
+        	System.out.println("UsersService.isLogin\nUser登入資訊: " + session.getAttribute("user"));
         	islogin = true;
         	return islogin;
         }
@@ -87,9 +89,12 @@ public class UsersService {
 		if(id != null && logTime != 0 && ssid != null ) {
 			islogin = ssid.equals(service.UsersService.calSsidMd5(id + KEY , logTime));	//如果MD5計算出來一樣，視為登入
 			if(islogin) {
-				request.getSession().setAttribute("ssid", ssid);				
+				request.getSession().setAttribute("ssid", ssid);
+				request.getSession().setAttribute("user", new dao.UsersDao().queryUsers(id) );
+				System.out.println("Cookie已經登入過: ssid & user 設定Session完成");
 			}else {
 				request.getSession().removeAttribute("ssid");
+				request.getSession().removeAttribute("user");
 			}
 		}
 		
@@ -119,7 +124,7 @@ public class UsersService {
 															*/
 				str[k++] = hexDigits[byte0 & 0xf];
 			}
-			System.out.println(str);
+			System.out.println("ssid: "+String.valueOf(str));
 			return String.valueOf(str);		//加密後字串
 		} catch (NoSuchAlgorithmException e) {
 			System.out.println("calcMD5 Error :" + e.getMessage());
