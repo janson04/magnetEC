@@ -16,7 +16,7 @@
 <title>會員登入 - 磁鐵超市</title>
 
 <%-- 此頁CSS載入開始 --%>
-<link rel="stylesheet" href="css/users_login.css" type="text/css" />
+<link rel="stylesheet" href="../css/users_login.css" type="text/css" />
 <%-- 此頁CSS載入結束 --%>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,11 +24,14 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.core.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.default.min.css'>
-<link rel="stylesheet" href="css/navfooter.css" type="text/css" />
-<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="../css/navfooter.css" type="text/css" />
+<link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 </head>
 <body>
-<jsp:include page="template/nav.jsp"></jsp:include>
+<div id="nav">
+	<jsp:include page="../template/nav.jsp"></jsp:include>
+</div>
 <%-- 開始 --%>
 
 <div class="header jumbotron"></div>
@@ -53,7 +56,7 @@
             <h5>
               <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="index.jsp">首頁</a></li>
+                  <li class="breadcrumb-item"><a href="/magnetEC/index.jsp">首頁</a></li>
                   <li class="breadcrumb-item"><a href="#">會員專區</a></li>
                   <li class="breadcrumb-item" aria-current="page">會員登入</li>
                 </ol>
@@ -67,12 +70,11 @@
           <div class="form-text text-center mb-3">為了提供您更完善的服務，請登入會員，謝謝您。</div>
           <div class="container" id="loginpage">
             <div class="row col-8 col-lg-6 mx-auto">
-              <div class="col-12 text-center text-danger">${loginfailMessage }</div>
               <form action="login.do?action=login" method="post">
                 <div class="my-3 row gx-1">
                   <label class="fw-bold col-sm-2 col-form-label" for="inputID">帳號</label>
                   <div class="col-sm-10">
-                    <input class="form-control" id="inputID" name="inputID" type="text" placeholder="User ID" value='${ID}'/>
+                    <input class="form-control" id="inputID" name="inputID" type="text" placeholder="User ID"/>
                   </div>
                 </div>
                 <div class="my-3 row gx-1">
@@ -99,12 +101,11 @@
 </section>
 
 <%-- 結束 --%>
-<jsp:include page="template/footer.html"></jsp:include>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<jsp:include page="../template/footer.html"></jsp:include>
 <script src='https://cdn.bootcdn.net/ajax/libs/skrollr/0.6.30/skrollr.min.js'></script>
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.min.js'></script>
-<script src="js/allPageJS.js"></script>
+<script src="../js/allPageJS.js"></script>
 
 <%-- 此頁JS載入開始 --%>
 <%-- <script src="js/users_register.js"></script> --%>

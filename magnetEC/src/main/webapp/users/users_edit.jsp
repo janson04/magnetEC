@@ -17,7 +17,7 @@
 <title>會員資料 - 磁鐵超市</title>
 
 <%-- 此頁CSS載入開始 --%>
-<link rel="stylesheet" href="css/users_register.css" type="text/css" />
+<link rel="stylesheet" href="../css/users_register.css" type="text/css" />
 <%-- 此頁CSS載入結束 --%>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,11 +25,14 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.core.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.default.min.css'>
-<link rel="stylesheet" href="css/navfooter.css" type="text/css" />
-<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="../css/navfooter.css" type="text/css" />
+<link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 </head>
 <body>
-<jsp:include page="template/nav.jsp"></jsp:include>
+<div id="nav">
+	<jsp:include page="../template/nav.jsp"></jsp:include>
+</div>
 <%-- 開始 --%>
 
 <div class="header jumbotron" style="margin-top: 70px;"></div>
@@ -57,7 +60,7 @@
             <h5>
               <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="index.jsp">首頁</a></li>
+                  <li class="breadcrumb-item"><a href="/magnetEC/index.jsp">首頁</a></li>
                   <li class="breadcrumb-item"><a href="#">會員專區</a></li>
                   <li class="breadcrumb-item active" aria-current="page">會員資料</li>
                 </ol>
@@ -181,12 +184,11 @@
 </section>
 
 <%-- 結束 --%>
-<jsp:include page="template/footer.html"></jsp:include>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<jsp:include page="../template/footer.html"></jsp:include>
 <script src='https://cdn.bootcdn.net/ajax/libs/skrollr/0.6.30/skrollr.min.js'></script>
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.min.js'></script>
-<script src="js/allPageJS.js"></script>
+<script src="../js/allPageJS.js"></script>
 
 <%-- 此頁JS載入開始 --%>
 <script src="js/users_register.js"></script>

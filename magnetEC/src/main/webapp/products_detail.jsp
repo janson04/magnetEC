@@ -18,9 +18,12 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.default.min.css'>
 <link rel="stylesheet" href="css/navfooter.css" type="text/css" />
 <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 </head>
 <body>
-<jsp:include page="template/nav.jsp"></jsp:include>
+<div id="nav">
+	<jsp:include page="template/nav.jsp"></jsp:include>
+</div>
 <%-- 開始 --%>
 
 
@@ -119,7 +122,6 @@
 
 <%-- 結束 --%>
 <jsp:include page="template/footer.html"></jsp:include>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 <script src='https://cdn.bootcdn.net/ajax/libs/skrollr/0.6.30/skrollr.min.js'></script>
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.min.js'></script>
@@ -135,12 +137,25 @@
     function addItemShoppingCart(){
     	var num = $("#num").val();
         $.post("template/ShoppingCart.jsp",{"productId":"${showProduct.productId}","num":num,"submit":"add"},result);
+        updateNav();
         alertify.success('成功加入購物車！<br/>如要結帳請點右上角💰️');
     }
     
     function removeItemShoppingCart(){
          var num = $("#item").val();
          $.post("template/ShoppingCart.jsp",{"productId":"${showProduct.productId}","item":num,"submit":"remove"},result);
+         updateNav();
+    }
+
+    function updateNav(){
+        $.ajax({
+            type: "POST",
+            url: "/magnetEC/template/nav.jsp",
+            data: null, // serializes the form's elements.
+            success: function (navdata) {
+                $("#nav").html(navdata);
+            }
+        });
     }
 </script>
 <%-- 此頁JS載入結束 --%>

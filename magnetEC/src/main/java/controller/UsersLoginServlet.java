@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -12,7 +14,7 @@ import dao.UsersDao;
 import model.Users;
 import service.UsersService;
 
-@WebServlet("/login.do")
+@WebServlet("/users/login.do")
 public class UsersLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -20,12 +22,20 @@ public class UsersLoginServlet extends HttpServlet {
 		super();
 	}
 
-	// 透過MD5演算法的不可逆性，即使使用者知道了帳號與加密後字串，也不可能解密得到金鑰或密碼。
-	// 只要保護好金鑰跟演算法，該機制就是安全的
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		doPost(request,response);
+	}
+	
+	// 透過MD5演算法的不可逆性，即使使用者知道了帳號與加密後字串，也不可能解密得到金鑰或密碼。
+	// 只要保護好金鑰跟演算法，該機制就是安全的
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter wr = response.getWriter();
+
 		
 		String action = request.getParameter("action");
 		String id = request.getParameter("inputID");
@@ -41,7 +51,8 @@ public class UsersLoginServlet extends HttpServlet {
 		if (UsersService.isLogin(request)) {
 			// 如早已有登入，且action是login，則跳轉至成功登入頁面
 			if ("login".equals(action)) {
-				response.sendRedirect("users_login_ok.jsp");
+				//response.sendRedirect("users_login_ok.jsp");
+				wr.write("已登入過");
 				return;
 			}
 			
@@ -49,23 +60,22 @@ public class UsersLoginServlet extends HttpServlet {
 		} else {
 			if (id != null && password != null) {
 				if (id.equals("")) {
-					request.setAttribute("loginfailMessage", "ID不能為空，請輸入ID");
-					request.getRequestDispatcher("users_login.jsp").forward(request, response);
+					wr.write("帳號不能為空，請輸入帳號");
+					//request.getRequestDispatcher("users_login.jsp").forward(request, response);
 				} else {
 					Users u = new UsersDao().queryUsers(id);
 					
 					if (u == null) {
-						request.setAttribute("loginfailMessage", "沒有此User ID: " + id + "<br/>請確認輸入是否正確");
-						request.getRequestDispatcher("users_login.jsp").forward(request, response);
+						wr.write("沒有此帳號: " + id + "<br/>請確認輸入是否正確");
+						//request.getRequestDispatcher("users_login.jsp").forward(request, response);
 						return;
 					} else if(!u.getUsers_password().equals(password)) {					
-						request.setAttribute("loginfailMessage", "密碼錯誤，請重新輸入");
+						wr.write("密碼錯誤，請重新輸入");
 						request.setAttribute("ID", id);
-						request.getRequestDispatcher("users_login.jsp").forward(request, response);
+						//request.getRequestDispatcher("users_login.jsp").forward(request, response);
 						return;
 					} else {
 						//帳號密碼相符，登入成功
-						request.removeAttribute("loginfailMessage");
 						loginVerificationOK = true;
 					}
 				}
@@ -99,9 +109,14 @@ public class UsersLoginServlet extends HttpServlet {
 			response.addCookie(logTimeCookie); 	// 輸出到用戶端
 			response.addCookie(ssidCookie); 	// 輸出到用戶端
 
-			// 跳轉至成功登入頁面
-			response.sendRedirect("users_login_ok.jsp");
-
+			//偵測是不是在登入頁面做登入動作
+			if (request.getHeader("Referer").contains("users_login.jsp")) {
+				// 跳轉至成功登入頁面
+				response.sendRedirect("users_login_ok.jsp");
+			} else {
+				wr.write("成功登入");		//不能亂改名，前端JS會偵測此名字做動
+			}
+			
 			return;
 		} else if ("logout".equals(action)) {
 			//如果action是logout，直接登出
@@ -127,13 +142,6 @@ public class UsersLoginServlet extends HttpServlet {
 			response.sendRedirect("users_logout_ok.jsp");
 			return;
 		}
-
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

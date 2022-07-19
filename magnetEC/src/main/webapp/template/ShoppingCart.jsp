@@ -35,7 +35,7 @@ if (SC == null) {
 	    <div class="container">
 		    <c:forEach items="${ShoppingCart.getShoppingMap()}" var="Corder_detail">
 		      <div class="row">
-		        <div class="col-4"><img src="images/product/${ Corder_detail.value.product_Id }.jpg" alt="" height="80px"/></div>
+		        <div class="col-4"><img src="/magnetEC/images/product/${ Corder_detail.value.product_Id }.jpg" alt="" height="80px"/></div>
 		        <div class="col-8">
 		          <div class="row name">${ Corder_detail.value.product_Name }</div>
 		          <div class="row qty">數量  : ${ Corder_detail.value.single_buynum }</div>
@@ -45,7 +45,15 @@ if (SC == null) {
 	    </div>
 	    <c:if test="${ShoppingCart.shoppingMapSize()>0 }"><hr/></c:if>
 	    <div class="row col">
-	      <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#checkoutPage">結帳</button>
+	    	<c:choose>
+				<c:when test="${empty sessionScope.ssid}">
+					<button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#checkoutPage">結帳</button>
+				</c:when>
+				<c:otherwise>
+					<button class="btn btn-success" type="button" data-bs-toggle="modal" onclick="location.href='/magnetEC/checkout';">結帳</button>
+				</c:otherwise>
+			</c:choose>
+	      	
 	    </div>
 	  </div>
 	</div>
