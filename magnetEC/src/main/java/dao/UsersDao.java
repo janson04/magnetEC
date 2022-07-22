@@ -17,6 +17,10 @@ public class UsersDao implements UsersDaoImpl{
     public static void main(String[] args) {
     	//add() 測試
 //    	new UsersDao().add("ID","a12345678","測試名稱","0935123456","","","","","");
+    	
+    	//boolean deleteUsers(String users_id) --測試開始--
+//    	new UsersDao().deleteUsers("zoo");
+    	//boolean deleteUsers(String users_id) --測試結束--
 	}
     
     
@@ -53,7 +57,7 @@ public class UsersDao implements UsersDaoImpl{
         return l;
     }
     
-    //藉由users_id找出整筆Users
+    //R 藉由users_id找出整筆Users
     @Override
     public Users queryUsers(String users_id) {
         MySQLDao.start();
@@ -84,7 +88,7 @@ public class UsersDao implements UsersDaoImpl{
         return u;
     }
     
-    //查找帳號是否存在
+    //R 查找帳號是否存在
     @Override
     public boolean queryIsUserId(String users_id) {
         MySQLDao.start();
@@ -103,7 +107,7 @@ public class UsersDao implements UsersDaoImpl{
         return IsUsersid;
     }
 
-    //新增帳號
+    //C 新增帳號
     @Override
     public boolean add(String users_id,String users_password,String name, String phone
     		,String email,String city,String postcode,String address
@@ -146,7 +150,7 @@ public class UsersDao implements UsersDaoImpl{
         return addSuccess;
     }
 
-
+    //U 更新除了密碼及時間外的資料
 	@Override
 	public boolean updateUsersNotPasswordTime(Users user) {
 		boolean updateSuccess=false;
@@ -187,6 +191,70 @@ public class UsersDao implements UsersDaoImpl{
         }
         MySQLDao.stop();
         return updateSuccess;
+	}
+
+	//U 只更新密碼
+	@Override
+	public boolean updateUsersPassword(String users_id ,String newPassword) {
+		boolean updateSuccess=false;
+		
+		MySQLDao.start();
+        if (MySQLDao.DB_ConnectionStatus) {
+        	int runline = 0;
+        	String sqltext="UPDATE users SET "
+        			+ "users_password = ? "
+        			+ "WHERE users_id = ?";
+            try {
+                PreparedStatement ps = conn.prepareStatement(sqltext);
+                ps.setString(1, newPassword);
+                ps.setString(2, users_id);
+
+                runline = ps.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(Corder_detailDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            if(runline > 0){
+                System.out.println(users_id+"的密碼更新資料成功");
+                updateSuccess = true;
+            }else{
+                System.out.println(users_id+"的密碼更新資料失敗");
+                updateSuccess = false;
+            }
+        }
+        MySQLDao.stop();
+        return updateSuccess;
+	}
+
+	//D 刪除(依據users_id)
+	@Override
+	public boolean deleteUsers(String users_id) {
+		boolean deleteSuccess=false;
+		
+		MySQLDao.start();
+        if (MySQLDao.DB_ConnectionStatus) {
+        	int runline = 0;
+        	String sqltext="DELETE FROM users "
+        			+ "WHERE users_id = ?";
+            try {
+                PreparedStatement ps = conn.prepareStatement(sqltext);
+                ps.setString(1, users_id);
+                
+                runline = ps.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(Corder_detailDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            if(runline > 0){
+                System.out.println(users_id+"的Users刪除資料成功");
+                deleteSuccess = true;
+            }else{
+                System.out.println(users_id+"的Users刪除資料失敗");
+                deleteSuccess = false;
+            }
+        }
+        MySQLDao.stop();
+        return deleteSuccess;
 	}  
 
 }

@@ -44,10 +44,10 @@
       <div class="col-3">
         <div class="list-group">
 	        <a class="list-group-item list-group-item-action active" aria-current="true">會員專區</a>
-	        <a class="list-group-item list-group-item-action d-none" href="">會員註冊</a>
-	        <a class="list-group-item list-group-item-action d-none" href="">會員登入</a>
-	        <a class="list-group-item list-group-item-action list-group-item-info" href="">會員資料</a>
-	        <a class="list-group-item list-group-item-action" href="">修改密碼</a>
+	        <a class="list-group-item list-group-item-action d-none" href="users_register.jsp">會員註冊</a>
+	        <a class="list-group-item list-group-item-action d-none" href="users_login.jsp">會員登入</a>
+	        <a class="list-group-item list-group-item-action list-group-item-info">會員資料</a>
+	        <a class="list-group-item list-group-item-action" href="users_changepw.jsp">變更密碼</a>
 	        <a class="list-group-item list-group-item-action" href="">訂單查詢</a>
 			<a class="list-group-item list-group-item-action" href="login.do?action=logout">會員登出</a>
         </div>
@@ -73,8 +73,8 @@
           <div class="fs-3 fw-bold text-center">個人資料修改</div>
           <div class="form-text text-center mb-3">為了提供您更完善的服務，請務必輸入正確的資料，謝謝您。</div>
         </div>
-        <div class="container" id="registerpage">
-          <form class="row g-3 position-relative needs-validation" action="users_update" method="post" novalidate="">
+        <div class="container mainarea" id="registerpage">
+          <form class="row g-3 position-relative needs-validation" action="users_update?action=update" method="post" novalidate="">
             <div class="col-lg-4 position-relative">
               <div class="row">
                 <label class="form-label" for="users_id"><span>帳號</span></label>
@@ -178,6 +178,12 @@
             </div>
           </form>
         </div>
+        <!--會員永久刪除-->
+        <div class="row col-12 mx-1 mt-4">
+          <a id="deletaccout" onclick="deletAccout()" href="#deletaccout" style="text-decoration:none;">
+          	<div class="h6 fw-bold text-danger">永久刪除帳號 <span class="h6">(不可恢復，請小心使用)</span></div>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -209,6 +215,17 @@
 		  $("form").removeClass("was-validated");
 		  $("#users_id").removeClass("is-valid");
 		  $("#users_id").removeClass("is-invalid");
+		}
+
+	function deletAccout() {
+			alertify.set({ labels: { ok: "確定", cancel: "取消" } });
+			alertify.confirm("確認刪除帳號: <span style='color: blue; font-weight: 600;'>"+ $("#users_id").val() +"</span> ? <br/>按下確定後，<span style='color: red;'>將不能復原！</span>", function (e) {
+			    if (e) {
+			    	window.location.href = "users_delete";
+			    } else {
+			        return false;
+			    }
+			});
 		}
 </script>
 <%-- 此頁JS載入結束 --%>

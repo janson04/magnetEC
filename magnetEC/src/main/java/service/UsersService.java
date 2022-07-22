@@ -2,6 +2,7 @@ package service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Enumeration;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -11,9 +12,11 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import dao.UsersDao;
+import model.Users;
 
 @Path("/")
 public class UsersService {
@@ -31,18 +34,35 @@ public class UsersService {
         return String.valueOf(IsUsersid);
     }
 	
-//	@POST
-//    @Path("/login.do")
-//    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-//    @Produces(MediaType.TEXT_PLAIN)
-//    public String Login(@FormParam("users_id") String users_id) {
-//		boolean IsUsersid = false;
-//		if (users_id != null) {
-//			IsUsersid= new UsersDao().queryIsUserId(users_id);
-//		}
-//        System.out.println("users_id: "+users_id+"\tCheck: "+IsUsersid);
-//        return String.valueOf(IsUsersid);
-//    }
+	@POST
+	@Path("/checkOldPassword")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String CheckOldPassword(@FormParam("old_users_password") String old_users_password,
+			@Context HttpServletRequest request) {
+		boolean OldPasswordCheck = false;
+		
+		// 如果users_id已經存在資料庫，才會進行確認密碼是否正確
+		Users user = (Users) request.getSession().getAttribute("user");
+		String users_id = user.getUsers_id();
+		System.out.println(users_id);
+		if (!new UsersDao().queryIsUserId(users_id)) {
+			// 沒有此帳號，就無法確認密碼，所以回傳失敗
+			OldPasswordCheck = false;
+		} else {
+			if (old_users_password != null) {
+				Users u = new UsersDao().queryUsers(users_id);
+				if(u.getUsers_password().equals(old_users_password)) {
+					OldPasswordCheck = true;
+				}else {
+					OldPasswordCheck = false;
+				}
+			}
+		}
+		System.out.println("UsersService CheckOldPassword: "+"users_id: "+users_id+"\told_users_password: "+old_users_password+"\tCheck: "+OldPasswordCheck);
+		return String.valueOf(OldPasswordCheck);
+	}
+	
 	
 	public static void main(String[] args) {
 		//測試: public static String calcMD5(String ss) --開始--

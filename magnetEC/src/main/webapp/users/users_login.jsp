@@ -41,11 +41,14 @@
     <div class="row">
       <!--左方導覽-->
       <div class="col-3">
-        <div class="list-group">
+        <div class="list-group">        	
         	<a class="list-group-item list-group-item-action active" aria-current="true">會員專區</a>
-        	<a class="list-group-item list-group-item-action list-group-item-info" href="">會員登入</a>
-        	<a class="list-group-item list-group-item-action" href="">會員註冊</a>
-        	<a class="list-group-item list-group-item-action" href="">訂單查詢</a>
+        	<a class="list-group-item list-group-item-action" href="users_register.jsp">會員註冊</a>
+        	<a class="list-group-item list-group-item-action list-group-item-info">會員登入</a>
+        	<a class="list-group-item list-group-item-action d-none" href="users_edit.jsp">會員資料</a>
+        	<a class="list-group-item list-group-item-action d-none" href="users_changepw.jsp">變更密碼</a>
+        	<a class="list-group-item list-group-item-action d-none" href="">訂單查詢</a>
+	        <a class="list-group-item list-group-item-action d-none" href="ogin.do?action=logout">會員登出</a>
         </div>
       </div>
       <!--右方部分:會員登入-->
@@ -57,7 +60,7 @@
               <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="/magnetEC/index.jsp">首頁</a></li>
-                  <li class="breadcrumb-item"><a href="#">會員專區</a></li>
+                  <li class="breadcrumb-item"><a href="">會員專區</a></li>
                   <li class="breadcrumb-item" aria-current="page">會員登入</li>
                 </ol>
               </nav>
@@ -70,7 +73,7 @@
           <div class="form-text text-center mb-3">為了提供您更完善的服務，請登入會員，謝謝您。</div>
           <div class="container" id="loginpage">
             <div class="row col-8 col-lg-6 mx-auto">
-              <form action="login.do?action=login" method="post">
+              <form action="login.do?action=login" id="loginform" method="post">
                 <div class="my-3 row gx-1">
                   <label class="fw-bold col-sm-2 col-form-label" for="inputID">帳號</label>
                   <div class="col-sm-10">

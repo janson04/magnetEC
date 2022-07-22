@@ -19,6 +19,9 @@ public interface UsersDaoImpl {
     
 //U 更新
 	boolean updateUsersNotPasswordTime(Users user);
+	boolean updateUsersPassword(String users_id ,String password);
     
 //D 刪除
+	boolean deleteUsers(String users_id);
+	
 }

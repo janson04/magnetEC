@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>會員登出成功 - 磁鐵超市</title>
+<title>會員帳號刪除成功 - 磁鐵超市</title>
 
 <%-- 此頁CSS載入開始 --%>
 <link rel="stylesheet" href="../css/users_register.css" type="text/css" />
@@ -33,7 +33,7 @@
     <div class="row">
       <!--左方導覽-->
       <div class="col-3">
-        <div class="list-group">
+        <div class="list-group">			        	
 	        <a class="list-group-item list-group-item-action active" aria-current="true">會員專區</a>
 	        <a class="list-group-item list-group-item-action" href="users_register.jsp">會員註冊</a>
 	        <a class="list-group-item list-group-item-action" href="users_login.jsp">會員登入</a>
@@ -53,7 +53,7 @@
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="../index.jsp">首頁</a></li>
                   <li class="breadcrumb-item"><a href="#">會員專區</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">會員登出</li>
+                  <li class="breadcrumb-item active" aria-current="page">會員刪除</li>
                 </ol>
               </nav>
             </h5>
@@ -61,17 +61,17 @@
         </div>
         <!--會員登入成功-->
         <div class="row col-12 col-md-10 mx-auto">
-          <div class="fs-3 fw-bold text-center">會員登出成功</div>
-          <div class="form-text text-center mb-3">Logout in successfully</div>
+          <div class="fs-3 fw-bold text-center">會員帳號刪除成功</div>
+          <div class="form-text text-center mb-3">Member account deleted successfully</div>
         </div>
         <hr/>
         <div class="container" id="loginok">
-          <div class="fs-2 fw-bold text-center text-danger">成功登出會員</div>
-          <div class="fs-5 text-center">期待您下次到來，您還可以繼續瀏覽選購商品，或重新登入會員。</div>
+          <div class="fs-2 fw-bold text-center text-danger">成功刪除會員帳號</div>
+          <div class="fs-5 text-center">期待您下次到來，您還可以繼續瀏覽選購商品，或重新註冊會員。</div>
           <div class="text-center mt-3 mx-2">
             <button class="btn btn-sm btn-primary" onclick="window.location.href='../index.jsp'"><i class="fas fa-house"> 首頁</i></button>
             <button class="btn btn-sm btn-primary" onclick="window.location.href='../product?magnetType=all'"><i class="fas fa-magnet"> 磁鐵購買</i></button>
-            <button class="btn btn-sm btn-primary" onclick="window.location.href='users_login.jsp'"><i class="fas fa-magnifying-glass"> 會員登入</i></button>
+            <button class="btn btn-sm btn-primary" onclick="window.location.href='users_register.jsp'"><i class="fas fa-magnifying-glass"> 會員註冊</i></button>
           </div>
         </div>
       </div>

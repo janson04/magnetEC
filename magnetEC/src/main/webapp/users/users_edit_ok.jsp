@@ -34,11 +34,18 @@
       <!--左方導覽-->
       <div class="col-3">
         <div class="list-group">
+			<a class="list-group-item list-group-item-action" href="users_register.jsp">會員註冊</a>
+			<a class="list-group-item list-group-item-action" href="users_login.jsp">會員登入</a>
+			<a class="list-group-item list-group-item-action d-none" href="users_edit.jsp">會員資料</a>
+			<a class="list-group-item list-group-item-action d-none" href="users_changepw.jsp">變更密碼</a>
+			<a class="list-group-item list-group-item-action d-none" href="">訂單查詢</a>
+			<a class="list-group-item list-group-item-action d-none" href="ogin.do?action=logout">會員登出</a>
+
 	        <a class="list-group-item list-group-item-action active" aria-current="true">會員專區</a>
-	        <a class="list-group-item list-group-item-action d-none" href="">會員註冊</a>
-	        <a class="list-group-item list-group-item-action d-none" href="">會員登入</a>
+	        <a class="list-group-item list-group-item-action d-none" href="users_register.jsp">會員註冊</a>
+	        <a class="list-group-item list-group-item-action d-none" href="users_login.jsp">會員登入</a>
 	        <a class="list-group-item list-group-item-action list-group-item-info" href="users_edit.jsp">會員資料</a>
-	        <a class="list-group-item list-group-item-action" href="">修改密碼</a>
+	        <a class="list-group-item list-group-item-action" href="users_changepw.jsp">變更密碼</a>
 	        <a class="list-group-item list-group-item-action" href="">訂單查詢</a>
 			<a class="list-group-item list-group-item-action" href="login.do?action=logout">會員登出</a>
         </div>

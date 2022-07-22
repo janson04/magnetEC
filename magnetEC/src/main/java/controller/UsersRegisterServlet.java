@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.UsersDao;
 
 
-@WebServlet("/users_register")
+@WebServlet("/users/users_register")
 public class UsersRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -1,47 +1,50 @@
-import java.util.ArrayList;
+
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class test {
-
 	public static void main(String[] args) {
-
-		List<String> alpha = new ArrayList<>(Arrays.asList("a", "b", "c", "d"));
-
-		List<Boolean> collect2 = alpha.stream().map(x->x.contains("a")).collect(Collectors.toList());
-		System.out.println(collect2); 		// [true, false, false, false]
 		
-		List<String> collect3 = alpha.stream().map(x->{
-			if(x.contains("a")) {
-				return x;
-			}
-			return null;
-		}).collect(Collectors.toList());
-		System.out.println(collect3);
+		List<Country> couList = Arrays.asList(
+		        new Country("Egypt", Country.Continent.Africa),
+		        new Country("Japan", Country.Continent.ASIA),
+		        new Country("Germany", Country.Continent.EUROPE),
+		        new Country("Italy", Country.Continent.EUROPE));
+		Map<Country.Continent, List<String>> regionNames = couList.stream().
+		            collect(
+		            		Collectors.groupingBy(
+		            				Country::getRegion,
+		            				Collectors.mapping(
+		            						Country::getName, Collectors.toList()
+		            						)
+			                )
+		            	);
+		System.out.println(regionNames.getClass().getSimpleName());
+		System.out.println(regionNames);
 		
-		// Before Java8
-		List<String> alphaUpper = new ArrayList<>();
-		for (String s : alpha) {
-			alphaUpper.add(s.toUpperCase());
-		}
-
-		System.out.println(alpha); 		// [a, b, c, d]
-		System.out.println(alphaUpper); // [A, B, C, D]
-
-		// Java 8
-		List<String> collect = alpha.stream().map(String::toUpperCase).collect(Collectors.toList());
-		System.out.println(collect); 	// [A, B, C, D]
-
-		// Extra, streams apply to any data type.
-		List<Integer> num = Arrays.asList(1, 2, 3, 4, 5);
-		List<Integer> collect1 = num.stream().map(n -> n * 2).collect(Collectors.toList());
-		System.out.println(collect1); 	// [2, 4, 6, 8, 10]
-
-		
-		
+		System.out.println("EUROPE".hashCode());
+		System.out.println("ASIA".hashCode());
+		System.out.println("Africa".hashCode());
 	}
-
 }
 
-
+class Country {
+    public enum Continent {
+        ASIA, EUROPE, Africa
+    }
+    String name;
+    Continent region;
+    public Country(String na, Continent reg) {
+        name = na;
+        region = reg;
+    }
+    public String getName() {
+        return name;
+    }
+    public Continent getRegion() {
+        return region;
+    }
+}

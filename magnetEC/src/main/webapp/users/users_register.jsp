@@ -33,10 +33,14 @@
     <div class="row">
       <!--左方導覽-->
       <div class="col-3">
-        <div class="list-group"><a class="list-group-item list-group-item-action active" aria-current="true">會員專區</a>
-        	<a class="list-group-item list-group-item-action" href="users_login.jsp">會員登入</a>
+        <div class="list-group">
+        	<a class="list-group-item list-group-item-action active" aria-current="true">會員專區</a>
         	<a class="list-group-item list-group-item-action list-group-item-info">會員註冊</a>
-        	<a class="list-group-item list-group-item-action" href="">訂單查詢</a>
+        	<a class="list-group-item list-group-item-action" href="users_login.jsp">會員登入</a>
+	        <a class="list-group-item list-group-item-action d-none" href="users_edit.jsp">會員資料</a>
+	        <a class="list-group-item list-group-item-action d-none" href="users_changepw.jsp">變更密碼</a>
+	        <a class="list-group-item list-group-item-action d-none" href="">訂單查詢</a>
+	        <a class="list-group-item list-group-item-action d-none" href="ogin.do?action=logout">會員登出</a>
         </div>
       </div>
       <!--右方部分:會員註冊-->
@@ -48,7 +52,7 @@
               <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="/magnetEC/index.jsp">首頁</a></li>
-                  <li class="breadcrumb-item"><a href="#">會員專區</a></li>
+                  <li class="breadcrumb-item"><a href="">會員專區</a></li>
                   <li class="breadcrumb-item active" aria-current="page">會員註冊</li>
                 </ol>
               </nav>
@@ -60,12 +64,12 @@
           <div class="fs-3 fw-bold text-center">會員註冊</div>
           <div class="form-text text-center mb-3">為了提供您更完善的服務，請務必輸入正確的資料，謝謝您。</div>
         </div>
-        <div class="container" id="registerpage">
+        <div class="container mainarea">
           <form class="row g-3 position-relative needs-validation" action="users_register" method="post" onsubmit="return formcheck()" novalidate="">
             <div class="col-lg-4 position-relative">
               <div class="row">
                 <label class="form-label" for="users_id"><span>帳號</span><span class="small text-danger"> (必填)</span></label>
-                <div class="input-group has-validation"><span class="input-group-text">@</span>
+                <div class="input-group has-validation formCheckDefault"><span class="input-group-text">@</span>
                   <input class="form-control" id="users_id" name="users_id" type="text" aria-describedby="請填寫一個帳號" required=""/>
                   <div class="invalid-feedback">未輸入或發現重複的帳號</div>
                 </div>
@@ -174,20 +178,22 @@
 		//alert(data);
 	    if(data == "true"){
 	    	alertify.error("發現帳號重複，請輸入其它帳號");
-
-	    	$("#users_id").removeClass("is-valid");
-	    	$("#users_id").addClass("is-invalid");
+	    	InvalidCSS("#users_id");
 		}else{
-			$("#users_id").removeClass("is-invalid");
 			if($("#users_id").val().length>0){
-				$("#users_id").addClass("is-valid");
+				ValidCSS("#users_id");
 			}
 		}
 	}
 	//確認帳號
 	$("#users_id").keyup(function checkUsersId(){
 		var users_id = $("#users_id").val();
-	    $.post("rest/checkUsersId",{"users_id": users_id},result);
+
+		if (users_id.length > 0){
+			$.post("../rest/checkUsersId",{"users_id": users_id},result);
+		}else{
+			InvalidCSS("#users_id");
+		}
 	});
 	
 </script>

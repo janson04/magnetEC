@@ -17,12 +17,12 @@
         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">磁鐵介紹</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="/magnetEC/index.jsp#ND">燒結釹鐵硼</a></li>
-            <li><a class="dropdown-item" href="/magnetEC/iindex.jsp#FE">鐵氧體磁鐵</a></li>
-            <li><a class="dropdown-item" href="/magnetEC/iindex.jsp#RM">軟性橡膠磁鐵</a></li>
-            <li><a class="dropdown-item" href="/magnetEC/iindex.jsp#SM">釤鈷磁鐵</a></li>
-            <li><a class="dropdown-item" href="/magnetEC/iindex.jsp#AL">鋁鎳鈷磁鐵</a></li>
-            <li><a class="dropdown-item" href="/magnetEC/iindex.jsp#PM">塑膠磁鐵</a></li>
-            <li><a class="dropdown-item" href="/magnetEC/iindex.jsp#MQ">黏結釹鐵硼</a></li>
+            <li><a class="dropdown-item" href="/magnetEC/index.jsp#FE">鐵氧體磁鐵</a></li>
+            <li><a class="dropdown-item" href="/magnetEC/index.jsp#RM">軟性橡膠磁鐵</a></li>
+            <li><a class="dropdown-item" href="/magnetEC/index.jsp#SM">釤鈷磁鐵</a></li>
+            <li><a class="dropdown-item" href="/magnetEC/index.jsp#AL">鋁鎳鈷磁鐵</a></li>
+            <li><a class="dropdown-item" href="/magnetEC/index.jsp#PM">塑膠磁鐵</a></li>
+            <li><a class="dropdown-item" href="/magnetEC/index.jsp#MQ">黏結釹鐵硼</a></li>
           </ul>
           <li class="nav-item"><a class="nav-link" href="/magnetEC/product?magnetType=all">磁鐵購買</a></li>
         </li>
