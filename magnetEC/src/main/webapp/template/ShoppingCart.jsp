@@ -2,38 +2,84 @@
     pageEncoding="UTF-8"
     import="service.ShoppingCartService"
     import="model.Product"
+    import="model.Users"
+    import="model.Shoppingcart"
     import="dao.ProductDaoImpl"
+    import="dao.ShoppingcartDaoImpl"
+	import="java.util.List"
     %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	ShoppingCartService SC = (ShoppingCartService) request.getSession().getAttribute("ShoppingCart");
+
+	Users user = (Users) request.getSession().getAttribute("user");
+	String users_id = null;
+	if (user != null) {
+		users_id = user.getUsers_id();
+	}
 	
 	//如果還沒有購物車的Session，創建一個
-	if (SC == null) {
+	if (SC == null || (SC != null && SC.shoppingMapSize() == 0)) {
 		SC = new ShoppingCartService();
+		//如果有登入 (user不為null)，讀取此uid的購物車清單
+		if (users_id != null){
+			List<Shoppingcart> lsc = new dao.ShoppingcartDaoImpl().queryUIDList(users_id);
+			for (Shoppingcart sc:lsc) {
+				System.out.println(sc);
+				Product p = new ProductDaoImpl().queryforProductId(sc.getProduct_Id());
+				int singlebuynum = sc.getSingleBuynum();
+				if (p != null) {
+					SC.addProduct(p,singlebuynum);
+				}
+			}
+			
+		}
+		
 		request.getSession().setAttribute("ShoppingCart", SC);
 	}
 %>
 
 <%
-	System.out.println("submit: "+request.getParameter("submit"));
-	System.out.println("productId: "+request.getParameter("productId"));
+	//System.out.println("ShoppingCart.jsp submit: "+request.getParameter("submit"));
+	//System.out.println("ShoppingCart.jsp productId: "+request.getParameter("productId"));
 	
 	if (request.getParameter("submit") != null){
-		//如果submit=add 且 buynum 不為空，則執行新增至購物車
+		//如果submit不為空，則執行購物車相關操作
+		String productId = request.getParameter("productId");
+		
 		if (request.getParameter("submit").equals("add") && request.getParameter("buynum") != null){
-	//購物車商品增加購買數量
-	Product p = new ProductDaoImpl().queryforProductId(request.getParameter("productId"));
-	int buynum = Integer.parseInt(request.getParameter("buynum"));
-	SC.addProduct(p,buynum);
-		} else if (request.getParameter("submit").equals("modify")){
-	//購物車商品修改至指定數量
-	int buynum = Integer.parseInt(request.getParameter("buynum"));
-	SC.modifyProduct(request.getParameter("productId"),buynum);
+			//購物車商品增加購買數量
+			Product p = new ProductDaoImpl().queryforProductId(productId);
+			int buynum = Integer.parseInt(request.getParameter("buynum"));
+			SC.addProduct(p,buynum);
+			
+			//20220730新增: 回存至Shoppingcart資料庫操作
+			if (users_id != null) {
+				boolean updateSuccess = new ShoppingcartDaoImpl().add(users_id, productId, SC.getShoppingMap().get(productId).getSingle_buynum());
+				System.out.println("ShoppingCart.jsp 新增: " + updateSuccess);
+			}
+			
+		} else if (request.getParameter("submit").equals("modify") && request.getParameter("buynum") != null){
+			//購物車商品修改至指定數量
+			int buynum = Integer.parseInt(request.getParameter("buynum"));
+			SC.modifyProduct(productId,buynum);
+			
+			//20220730新增: 回存至Shoppingcart資料庫操作
+			if (users_id != null) {
+				boolean updateSuccess = new ShoppingcartDaoImpl().update(users_id, productId, SC.getShoppingMap().get(productId).getSingle_buynum());
+				System.out.println("ShoppingCart.jsp 修改: " + updateSuccess);
+			}
+			
 		} else if (request.getParameter("submit").equals("remove")) {
-	//購物車移除購買商品
-	boolean removeSuccess = SC.deleteProduct(request.getParameter("productId"));
+			//購物車移除購買商品
+			boolean removeSuccess = SC.deleteProduct(productId);
+			
+			//20220730新增: 回存至Shoppingcart資料庫操作
+			if (users_id != null) {
+				boolean deleteSuccess = new ShoppingcartDaoImpl().deleteUIDPID(users_id , productId);
+				System.out.println("ShoppingCart.jsp 刪除: " + deleteSuccess);
+			}
 		}
 	}
 %>

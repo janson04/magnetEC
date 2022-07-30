@@ -71,7 +71,10 @@ function update_cart(num) {
 	});
 	
 	updateNav();
-	
+	refreshShoppingCartList();
+}
+
+function refreshShoppingCartList() {
 	$.ajax({
 		type: "POST",
 		async : false,										//是否異步處理，預設值: true
@@ -85,5 +88,4 @@ function update_cart(num) {
 			alert(xhr.status);
 		}
 	});
-
 }

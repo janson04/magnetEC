@@ -3,6 +3,7 @@ package service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import dao.ProductDaoImpl;
 import dao.UsersDaoImpl;
+import model.Corder_detail;
+import model.Product;
+import model.Shoppingcart;
 import model.Users;
 
 @Path("/")
@@ -153,5 +158,38 @@ public class UsersService {
 		return ss;
 	}
 	
+	//登入時把購物車內的東西全部存入資料庫，再從資料庫連同歷史購物車品項一同載入
+	public static void loadShoppingcart(HttpServletRequest request) {	
+		//取Session.ShoppingCart
+		ShoppingCartService SC = (ShoppingCartService) request.getSession().getAttribute("ShoppingCart");
+		
+		//取users_id
+		Users user = (Users) request.getSession().getAttribute("user");
+		String users_id = null;
+		if (user != null) {
+			users_id = user.getUsers_id();
+		}
+		
+		//購物車存入資料庫
+		if (SC != null && users_id != null) {
+			for (Corder_detail od:SC.getShoppingMap().values()) {
+				boolean addSuccuss = new dao.ShoppingcartDaoImpl().add(users_id, od.getProduct_Id(), od.getSingle_buynum());
+				System.out.println("UsersService loadShoppingcart: " + od.getProduct_Id() + " " + addSuccuss);
+			}
+		}
+		
+		//從資料庫全部重新讀取至購物車
+		SC = new ShoppingCartService();
+		List<Shoppingcart> lsc = new dao.ShoppingcartDaoImpl().queryUIDList(users_id);
+		for (Shoppingcart sc:lsc) {
+			System.out.println(sc);
+			Product p = new ProductDaoImpl().queryforProductId(sc.getProduct_Id());
+			int singlebuynum = sc.getSingleBuynum();
+			if (p != null) {
+				SC.addProduct(p,singlebuynum);
+			}
+		}
+		request.getSession().setAttribute("ShoppingCart", SC);
+	}
 	
 }

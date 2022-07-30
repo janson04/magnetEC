@@ -52,8 +52,9 @@ public class UsersLoginServlet extends HttpServlet {
 		if (UsersService.isLogin(request)) {
 			// 如早已有登入，且action是login，則跳轉至成功登入頁面
 			if ("login".equals(action)) {
-				//response.sendRedirect("/magnetEC/users/users_login_ok.jsp");
-				wr.write("已登入過");
+				UsersService.loadShoppingcart(request);		//20220730新增:合併當前購物車至資料庫，並重新全部讀取出來
+				
+				wr.write("重新登入成功");
 				return;
 			}
 			
@@ -76,7 +77,7 @@ public class UsersLoginServlet extends HttpServlet {
 						//request.getRequestDispatcher("users_login.jsp").forward(request, response);
 						return;
 					} else {
-						//帳號密碼相符，登入成功
+						//帳號密碼相符，登入成功						
 						loginVerificationOK = true;
 					}
 				}
@@ -109,6 +110,8 @@ public class UsersLoginServlet extends HttpServlet {
 			response.addCookie(IDCookie); 		// 輸出到用戶端
 			response.addCookie(logTimeCookie); 	// 輸出到用戶端
 			response.addCookie(ssidCookie); 	// 輸出到用戶端
+			
+			UsersService.loadShoppingcart(request);		//20220730新增:合併當前購物車至資料庫，並重新全部讀取出來
 			
 			if ( request.getHeader("Referer").contains("users_login.jsp") ) {
 				response.sendRedirect("/magnetEC/users/users_logout_ok.jsp");

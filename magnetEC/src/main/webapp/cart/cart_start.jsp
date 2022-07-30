@@ -250,7 +250,8 @@
                 $(".showlist").html(data);
             }
         });
-        update_cart(num);
+        updateNav();
+        refreshShoppingCartList();
         alertify.success('成功移除 ' + product_Name);
     }
     function updateNav(){
