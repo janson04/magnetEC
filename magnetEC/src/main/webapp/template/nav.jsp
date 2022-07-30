@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"
     import="service.ShoppingCartService"
     %>
+<%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-	// 判斷是否已經登入，沒有的話讀取Cookie判斷是否已經登入
+// 判斷是否已經登入，沒有的話讀取Cookie判斷是否已經登入
 	service.UsersService.isLogin(request);
 %>
 <!--上方導覽列20220618:開始 -->
@@ -33,6 +34,7 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div><span class="me-auto"></span>
+    
     <!--會員按鈕:開始-->
     <c:choose>
 	   	<c:when test="${empty sessionScope.ssid}">
@@ -50,46 +52,26 @@
 		    <i class="fas fa-shopping-cart"><span> 結 帳 </span><span>${ShoppingCart.shoppingMapSize()}</span></i></button>
 		</c:when>
 	   	<c:otherwise>
-	   		<button class="btn btn-md btn-danger my-2" id="checkout" type="button" data-bs-placement="bottom" title="點擊結帳" data-bs-toggle="modal" onclick="location.href='/magnetEC/checkout';" aria-hidden="true">
+	   		<button class="btn btn-md btn-danger my-2" id="checkout" type="button" data-bs-placement="bottom" title="點擊結帳" data-bs-toggle="modal" onclick="location.href='/magnetEC/cart/cart_start.jsp';" aria-hidden="true">
 		    <i class="fas fa-shopping-cart"><span> 結 帳 </span><span>${ShoppingCart.shoppingMapSize()}</span></i></button>
 	   	</c:otherwise>
     </c:choose>
     <!--購買清單(浮動)-->
     <div class="showlist modal-body" style="min-width: 350px">
       
-      <%-- <jsp:include page="ShoppingCart.jsp"></jsp:include> --%>
-      <%@ include file="ShoppingCart.jsp" %> <%-- 先包再執行 --%>
-      <!-- 
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="container">
-            <div class="row">
-              <div class="col-4"><img src="https://www.msmt.com.tw/upload/2019092017015367wyv1.jpg" alt="" height="80px"/></div>
-              <div class="col-8">
-                <div class="row name">D5x2mmT-燒結釹鐵硼磁鐵</div>
-                <div class="row qty">數量  : 3</div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-4"><img src="https://www.msmt.com.tw/upload/201910141441278ojuq1.jpg" alt="" height="80px"/></div>
-              <div class="col-8">
-                <div class="row name">D6x12mmT-燒結釹鐵硼磁鐵</div>
-                <div class="row qty">NT$ 19</div>
-              </div>
-            </div>
-          </div>
-          <hr/>
-          <div class="row col">
-            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#checkoutPage">結帳</button>
-          </div>
-        </div>
-      </div>
-      -->
+      <%-- <jsp:include page="ShoppingCart.jsp"></jsp:include> --%> <%-- 用戶端執行才載入進來編譯，但如無改變也只會編譯第一次 --%>
+      <%@ include file="ShoppingCart.jsp" %> <%-- 編譯時就先包進來一起 --%>
       
     </div>
+    
+    <!-- 手機版漢堡選單切換鈕 -->
+    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
   </div>
 </nav>
 <!-- 上方導覽列20220618:結束 -->
+
 <!--登入頁面 20220605更新-->
 <div class="modal fade" id="login">
   <div class="modal-dialog">
@@ -119,6 +101,7 @@
     </div>
   </div>
 </div>
+
 <!--登入+非會員購買頁面 20220605-->
 <div class="modal fade" id="checkoutPage">
   <div class="modal-dialog">
@@ -148,7 +131,7 @@
         <hr/>
         <div class="fs-5 fw-bold mb-2">非會員購買</div>
         <div class="row col-6 mx-auto">
-          <button class="btn btn-success">非會員直接購買</button>
+          <button class="btn btn-success" onclick="location.href='/magnetEC/cart/cart_start.jsp'">非會員直接購買</button>
         </div>
       </div>
     </div>
@@ -156,26 +139,74 @@
 </div>
 
 <script type="text/javascript">
-//滑鼠移進#checkout執行
-$("#checkout").mouseenter(
-    function () {
-        $(".showlist").css("top", parseInt($("#topnav").css("height")) - 25 + "px");
-        $(".showlist").slideDown(400);
-    }
-)
-
-
-//滑鼠移出.showlist執行
-$(".showlist").mouseleave(
-    function () {
-        $(".showlist").slideUp(400);
-    }
-)
-
-//除了點選 .showlist 不然都把 .showlist收起來
-$("nav,section,.header,footer").click(function () {
-    $(".showlist").slideUp(300);
-}
-)
+	//滑鼠移進#checkout執行
+	$("#checkout").mouseenter(
+	    function () {
+	        $(".showlist").css("top", parseInt($("#topnav").css("height")) - 25 + "px");
+	        $(".showlist").slideDown(400);
+	    }
+	)
+	
+	//滑鼠移出.showlist執行
+	$(".showlist").mouseleave(
+	    function () {
+	        $(".showlist").slideUp(400);
+	    }
+	)
+	
+	//除了點選 .showlist 不然都把 .showlist收起來
+	$("nav,section,.header,footer").click(
+		function () {
+	    	$(".showlist").slideUp(300);
+		}
+	)
+	
+	//登入用js
+	$("#loginform,#loginform1,#loginform2").submit(function(e) {
+		var nowurl= location.pathname;
+		var form = $(this);
+		var url = form.attr('action');
+		
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: form.serialize(), // serializes the form's elements.
+			success: function(data) {
+				if (data == "成功登入" || data == "已登入過") {
+					$("#closeloginform1").click();
+					$("#closeloginform2").click();
+					$.ajax({
+						type: "POST",
+						url: "/magnetEC/template/nav.jsp",
+						data: null,
+						success: function(navdata) {
+							$("#nav").html(navdata);
+						}
+					});
+					
+					if (form.attr('id')=='loginform2') {
+						//如果是 loginform2 的 submit，代表是結帳前的登入，登入成功直接跳轉至結帳畫面
+						window.location.href='/magnetEC/cart/cart_start.jsp';
+					} else if (nowurl.includes("users_login.jsp")){
+						//如果為登入畫面中做登入，則跳轉至登入成功畫面
+						window.location.href='users_login_ok.jsp';					
+					} else if (nowurl.includes("_ok.jsp")){
+						//如果為其餘訊息ok畫面，則跳轉至登入成功畫面
+						window.location.href='users_login_ok.jsp';					
+					} else {
+						//都非以上情況，不跳轉+顯示伺服器回傳訊息
+						alertify.alert(data);
+					}
+				}else{
+					alertify.set({ labels: { ok: "確定", cancel: "取消" } });
+					alertify.alert(data);
+				}
+	
+				//alert(data);
+			}
+		});
+	
+		e.preventDefault(); // avoid to execute the actual submit of the form.
+	});
 
 </script>

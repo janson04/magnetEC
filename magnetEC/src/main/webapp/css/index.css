@@ -2,7 +2,7 @@
 .header {
   padding: 100px 0px;
   text-align: center;
-  background-image: url(https://image.freepik.com/free-photo/bar-magnet-with-iron-powder-magnetic-field_127345-195.jpg);
+  background-image: url(/magnetEC/images/index_magnet.webp);
   background-size: cover;
   height: 400px;
   background-attachment: fixed;
@@ -15,13 +15,13 @@ section#story {
   background-color: #eee;
 }
 section#story .storyimg {
-  background-image: url(https://image.freepik.com/free-vector/hand-drawn-science-education-background_23-2148489766.jpg);
+  background-image: url(/magnetEC/images/index_hand-drawn-science-education-background.webp);
   background-size: cover;
 }
 
 section#magnet_type {
   padding: 20px 0px;
-  background-image: url(https://www.msmt.com.tw/images/common/index/index_bg.jpg);
+  background-image: url(/magnetEC/images/index_bg.jpg);
 }
 section#magnet_type .img_wrap {
   height: 300px;

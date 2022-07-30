@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UsersDao;
+import dao.UsersDaoImpl;
 import model.Users;
 
 /**
@@ -35,12 +35,12 @@ public class UsersDeleteServlet extends HttpServlet {
 		if (user != null) {
 			String users_id = user.getUsers_id();
 
-			if (!new UsersDao().queryIsUserId(users_id)) {
+			if (!new UsersDaoImpl().queryIsUserId(users_id)) {
 				// 沒有此帳號，就無法更新，所以回傳失敗
 				deleteSuccess = false;
 			} else {
 				System.out.println("要刪除的ID: " + users_id);
-				deleteSuccess = new UsersDao().deleteUsers(users_id);
+				deleteSuccess = new UsersDaoImpl().deleteUsers(users_id);
 			}
 
 			if (deleteSuccess) {

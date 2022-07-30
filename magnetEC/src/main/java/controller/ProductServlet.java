@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import dao.ProductDao;
+import dao.ProductDaoImpl;
 import model.EnumProductFullName;
 import model.Product;
 
@@ -36,12 +36,12 @@ public class ProductServlet extends HttpServlet {
 		//Parameter.magnetType沒給，就顯示所有產品
 		if(request.getParameter("magnetType") == null || request.getParameter("magnetType").equalsIgnoreCase("all")) {
 			request.setAttribute("magnetType","all");
-			l = new ProductDao().queryAllList();
+			l = new ProductDaoImpl().queryAllList();
 			
 			request.setAttribute("magnetTypeFullName","全部");
 		}else {
 			request.setAttribute("magnetType",request.getParameter("magnetType"));
-			l = new ProductDao().queryListforCategory(request.getParameter("magnetType"));
+			l = new ProductDaoImpl().queryListforCategory(request.getParameter("magnetType"));
 			
 			//把英文簡稱轉換成全名
 			request.setAttribute("magnetTypeFullName",EnumProductFullName.valueOf(request.getParameter("magnetType")).getFullName());

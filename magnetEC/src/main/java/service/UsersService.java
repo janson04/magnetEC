@@ -15,7 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import dao.UsersDao;
+import dao.UsersDaoImpl;
 import model.Users;
 
 @Path("/")
@@ -28,7 +28,7 @@ public class UsersService {
     public String CheckUserId(@FormParam("users_id") String users_id) {
 		boolean IsUsersid = false;
 		if (users_id != null) {
-			IsUsersid= new UsersDao().queryIsUserId(users_id);
+			IsUsersid= new UsersDaoImpl().queryIsUserId(users_id);
 		}
         System.out.println("users_id: "+users_id+"\tCheck: "+IsUsersid);
         return String.valueOf(IsUsersid);
@@ -46,12 +46,12 @@ public class UsersService {
 		Users user = (Users) request.getSession().getAttribute("user");
 		String users_id = user.getUsers_id();
 		System.out.println(users_id);
-		if (!new UsersDao().queryIsUserId(users_id)) {
+		if (!new UsersDaoImpl().queryIsUserId(users_id)) {
 			// 沒有此帳號，就無法確認密碼，所以回傳失敗
 			OldPasswordCheck = false;
 		} else {
 			if (old_users_password != null) {
-				Users u = new UsersDao().queryUsers(users_id);
+				Users u = new UsersDaoImpl().queryUsers(users_id);
 				if(u.getUsers_password().equals(old_users_password)) {
 					OldPasswordCheck = true;
 				}else {
@@ -110,7 +110,7 @@ public class UsersService {
 			islogin = ssid.equals(service.UsersService.calSsidMd5(id + KEY , logTime));	//如果MD5計算出來一樣，視為登入
 			if(islogin) {
 				request.getSession().setAttribute("ssid", ssid);
-				request.getSession().setAttribute("user", new dao.UsersDao().queryUsers(id) );
+				request.getSession().setAttribute("user", new dao.UsersDaoImpl().queryUsers(id) );
 				System.out.println("Cookie已經登入過: ssid & user 設定Session完成");
 			}else {
 				request.getSession().removeAttribute("ssid");

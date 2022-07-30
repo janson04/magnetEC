@@ -1,0 +1,45 @@
+#shoppingCartList {
+  width: 100%;
+}
+#shoppingCartList td {
+  vertical-align: middle;
+}
+#shoppingCartList .numwidth {
+  width: 150px;
+}
+
+#OrderShippingInformation {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  position: relative;
+  border: 1.5px solid #dee2e6;
+}
+
+#OrderComplete {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  position: relative;
+  border: 1.5px solid #dee2e6;
+}
+
+hr {
+  margin: 12px 5px;
+}
+
+.previousPage {
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+.previousPage :hover {
+  color: #46A327;
+}
+
+#receiptList {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1.5px solid #dee2e6;
+}
+#receiptList input:hover, #receiptList label:hover {
+  cursor: pointer;
+}

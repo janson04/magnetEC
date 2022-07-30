@@ -90,21 +90,24 @@
                 <div class="input-group">
                   <button class="btn btn-outline-primary" type="button" onclick="getnum('-')" <c:if test="${showProduct.stock <= 0}">disabled</c:if> >－</button>
                   <input class="form-control" type="tel" 
-                  <c:choose>
-	                  <c:when test="${showProduct.stock <= 0}">
-	                  	value="0" 
-	                  </c:when>
-	                  <c:otherwise>
-	                  	value="1" 
-	                  </c:otherwise>
-                  </c:choose>
-                  name="num" id="num" onkeyup="chknum();" <c:if test="${showProduct.stock <= 0}">disabled</c:if> />
+	                  <c:choose>
+		                  <c:when test="${showProduct.stock <= 0}">
+		                  	value="0" 
+		                  </c:when>
+		                  <c:otherwise>
+		                  	value="1" 
+		                  </c:otherwise>
+	                  </c:choose>
+                  	name="buynum" id="buynum" onkeyup="chknum();" <c:if test="${showProduct.stock <= 0}">disabled</c:if> />
                   <button class="btn btn-outline-primary" type="button" onclick="getnum('+')" <c:if test="${showProduct.stock <= 0}">disabled</c:if> >＋</button>
                 </div>
               </div>
             </div>
             <div class="row col">
               <button class="addProduct btn btn-danger" type="button" onclick="addItemShoppingCart()" <c:if test="${showProduct.stock <= 0}">disabled</c:if> ><i class="fas fa-cart-plus">加入購物車</i></button>
+              <!-- 
+              <button class="addProduct btn btn-danger" type="button" onclick="removeItemShoppingCart()" <c:if test="${showProduct.stock <= 0}">disabled</c:if> ><i class="fas fa-cart-plus">移除購物車</i></button>
+               -->
             </div>
           </div>
         </div>
@@ -119,7 +122,6 @@
 </section>
 
 
-
 <%-- 結束 --%>
 <jsp:include page="template/footer.html"></jsp:include>
 <script src='https://cdn.bootcdn.net/ajax/libs/skrollr/0.6.30/skrollr.min.js'></script>
@@ -130,33 +132,39 @@
 <%-- 此頁JS載入開始 --%>
 <script src="js/product_detail.js"></script>
 <script type="text/javascript">
-    function result(data,status){
-        $(".showlist").html(data);
-    }
-    
-    function addItemShoppingCart(){
-    	var num = $("#num").val();
-        $.post("template/ShoppingCart.jsp",{"productId":"${showProduct.productId}","num":num,"submit":"add"},result);
-        updateNav();
-        alertify.success('成功加入購物車！<br/>如要結帳請點右上角💰️');
-    }
-    
-    function removeItemShoppingCart(){
-         var num = $("#item").val();
-         $.post("template/ShoppingCart.jsp",{"productId":"${showProduct.productId}","item":num,"submit":"remove"},result);
-         updateNav();
-    }
-
-    function updateNav(){
-        $.ajax({
-            type: "POST",
-            url: "/magnetEC/template/nav.jsp",
-            data: null, // serializes the form's elements.
-            success: function (navdata) {
-                $("#nav").html(navdata);
-            }
-        });
-    }
+	function result(data, status) {
+		$(".showlist").html(data);
+	}
+	
+	function addItemShoppingCart() {
+		var buynum = $("#buynum").val();
+		$.ajaxSetup({
+			async: false,
+		});
+		$.post("/magnetEC/template/ShoppingCart.jsp", { "productId": "${showProduct.productId}", "buynum": buynum, "submit": "add" }, result);
+		updateNav();
+		alertify.success('成功加入購物車！<br/>如要結帳請點右上角💰️');
+	}
+	
+	function removeItemShoppingCart() {
+		$.ajaxSetup({
+			async: false
+		});
+		$.post("/magnetEC/template/ShoppingCart.jsp", { "productId": "${showProduct.productId}", "submit": "remove" }, result);
+		updateNav();
+		alertify.success('成功移除 ${showProduct.productName}<br/>如要結帳請點右上角💰️');
+	}
+	
+	function updateNav() {
+		$.ajax({
+			type: "POST",
+			url: "/magnetEC/template/nav.jsp",
+			data: null, // serializes the form's elements.
+			success: function(navdata) {
+				$("#nav").html(navdata);
+			}
+		});
+	}
 </script>
 <%-- 此頁JS載入結束 --%>
 

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ProductDao;
+import dao.ProductDaoImpl;
 import model.EnumProductFullName;
 import model.Product;
 
@@ -22,7 +22,7 @@ public class ProductsDetailServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Product p = new ProductDao().queryforProductId(request.getParameter("id"));
+		Product p = new ProductDaoImpl().queryforProductId(request.getParameter("id"));
 		
 		if(p == null) {
 			//如查詢不到該商品，則轉址至商品購買頁

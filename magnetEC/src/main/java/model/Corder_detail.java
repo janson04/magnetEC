@@ -1,5 +1,7 @@
 package model;
 
+import dao.ProductDaoImpl;
+
 //訂單明細，還未是訂單時，是購物車的單筆項目
 public class Corder_detail {
     private Integer id; 		//AI
@@ -39,6 +41,12 @@ public class Corder_detail {
 		this.single_buynum = single_buynum;
 	}
 	
+	//藉由productId找到Product model
+    public Product getProduct(String productId) {
+    	Product p = new ProductDaoImpl().queryforProductId(productId);    	
+    	return p;
+    }
+    
 	public Integer getId() {
 		return id;
 	}

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UsersDao;
+import dao.UsersDaoImpl;
 
 
 @WebServlet("/users/users_register")
@@ -29,7 +29,7 @@ public class UsersRegisterServlet extends HttpServlet {
 		//如果users_id已經存在資料庫，則回傳失敗
 		String users_id = request.getParameter("users_id");
 		System.out.println(users_id);
-		if (new UsersDao().queryIsUserId(users_id)) {
+		if (new UsersDaoImpl().queryIsUserId(users_id)) {
 			addSuccess = false;
 		}else {
 			String users_password = request.getParameter("users_password");
@@ -49,7 +49,7 @@ public class UsersRegisterServlet extends HttpServlet {
 					+"\t"+address
 					+"\t"+registerTime);
 			
-			addSuccess= new UsersDao().add(users_id, users_password, name,
+			addSuccess= new UsersDaoImpl().add(users_id, users_password, name,
 					phone, email, city, postcode, address, registerTime);
 		}
 		

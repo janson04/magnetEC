@@ -18,7 +18,7 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.default.min.css'>
 <link rel="stylesheet" href="../css/navfooter.css" type="text/css" />
 <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+`
 </head>
 <body>
 <div id="nav">

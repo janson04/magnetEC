@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UsersDao;
+import dao.UsersDaoImpl;
 import model.Users;
 
 @WebServlet("/users/users_update")
@@ -64,7 +64,7 @@ public class UsersUpdateServlet extends HttpServlet {
 		String users_id = user.getUsers_id();
 		String old_password = user.getUsers_password();
 		System.out.println(users_id);
-		if (!new UsersDao().queryIsUserId(users_id)) {
+		if (!new UsersDaoImpl().queryIsUserId(users_id)) {
 			// 沒有此帳號，就無法更新，所以回傳失敗
 			updateSuccess = false;
 		} else {
@@ -82,12 +82,12 @@ public class UsersUpdateServlet extends HttpServlet {
 				
 				System.out.println("要更新的資料: " + u.toString());
 				
-				updateSuccess = new UsersDao().updateUsersNotPasswordTime(u);
+				updateSuccess = new UsersDaoImpl().updateUsersNotPasswordTime(u);
 			}else if ("changepw".equals(action)) {
 				String old_users_password = request.getParameter("old_users_password");
 				String new_users_password = request.getParameter("users_password");
 				if (old_password.equals(old_users_password)) {
-					updateSuccess = new UsersDao().updateUsersPassword(
+					updateSuccess = new UsersDaoImpl().updateUsersPassword(
 							users_id 
 							,new_users_password);
 				} else {
@@ -99,7 +99,7 @@ public class UsersUpdateServlet extends HttpServlet {
 
 		if (updateSuccess) {
 			//成功更新，所以也要更新Session的user
-			request.getSession().setAttribute("user", new dao.UsersDao().queryUsers(users_id) );
+			request.getSession().setAttribute("user", new dao.UsersDaoImpl().queryUsers(users_id) );
 			System.out.println("UsersUpdateServlet: 更新成功");
 			
 			if ("update".equals(action)) {

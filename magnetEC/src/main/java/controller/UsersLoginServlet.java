@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UsersDao;
+import dao.UsersDaoImpl;
 import model.Users;
 import service.UsersService;
 
@@ -32,6 +32,7 @@ public class UsersLoginServlet extends HttpServlet {
 	// 只要保護好金鑰跟演算法，該機制就是安全的
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter wr = response.getWriter();
@@ -42,7 +43,7 @@ public class UsersLoginServlet extends HttpServlet {
 		String password = request.getParameter("inputPassword");
 		long logTime = System.currentTimeMillis(); // 現在時間(毫秒為單位)
 		String ssid = null;
-		int timeout = 1 * 60 * 60; 		// 1小時有效，此為秒為單位
+		int timeout = 1 * 60 * 60 * 24 * 3; 		// 3天有效，此為秒為單位
 //        int timeout = 30*24*60*60;	//30天內有效，此為秒為單位
 //        int timeout = -1;				//關閉瀏覽器則失效(-1)
 		
@@ -63,7 +64,7 @@ public class UsersLoginServlet extends HttpServlet {
 					wr.write("帳號不能為空，請輸入帳號");
 					//request.getRequestDispatcher("users_login.jsp").forward(request, response);
 				} else {
-					Users u = new UsersDao().queryUsers(id);
+					Users u = new UsersDaoImpl().queryUsers(id);
 					
 					if (u == null) {
 						wr.write("沒有此帳號: " + id + "<br/>請確認輸入是否正確");
@@ -93,7 +94,7 @@ public class UsersLoginServlet extends HttpServlet {
 			
 			//設定Session的ssid值和user值，代表已經登入
 			request.getSession().setAttribute("ssid", ssid);
-			request.getSession().setAttribute("user", new UsersDao().queryUsers(id) );
+			request.getSession().setAttribute("user", new UsersDaoImpl().queryUsers(id) );
 			System.out.println("成功登入: ssid & user 設定Session完成");
 			
 			Cookie IDCookie = new Cookie("ID", id); // 新增Cookie
@@ -109,8 +110,12 @@ public class UsersLoginServlet extends HttpServlet {
 			response.addCookie(logTimeCookie); 	// 輸出到用戶端
 			response.addCookie(ssidCookie); 	// 輸出到用戶端
 			
-			wr.write("成功登入");		//不能亂改名，前端JS會偵測此名字做動
-			
+			if ( request.getHeader("Referer").contains("users_login.jsp") ) {
+				response.sendRedirect("/magnetEC/users/users_logout_ok.jsp");
+			} else {
+				wr.write("成功登入");		//不能亂改名，前端JS會偵測此名字做動
+			}
+
 			return;
 		} else if ("logout".equals(action) || "delete".equals(action)) {
 			//如果action是logout，直接登出
@@ -118,6 +123,7 @@ public class UsersLoginServlet extends HttpServlet {
 			//清出Session的ssid值/user值，代表已經登出
 			request.getSession().removeAttribute("ssid");
 			request.getSession().removeAttribute("user");
+
 			
 			Cookie IDCookie = new Cookie("ID", ""); // 新增Cookie
 			IDCookie.setMaxAge(0); 				// 設定失效時間長度為0 => 刪除

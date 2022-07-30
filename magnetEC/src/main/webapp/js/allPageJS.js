@@ -5,7 +5,7 @@ $(document).ready(function() {
 		var s = skrollr.init()
 	}
 
-	//會員註冊更新頁用
+	//Bootstrap5 使用
 	'use strict';
 	window.addEventListener('load', function() {
 		var forms = document.getElementsByClassName("needs-validation");
@@ -26,46 +26,6 @@ $(".header").css("margin-top", parseInt($("#topnav").css("height")) + 0 + "px");
 //視窗大小改變時執行
 $(window).resize(function() {
 	$(".showlist").css("top", parseInt($("#topnav").css("height")) - 25 + "px");
-});
-
-
-//Nav登入用js
-// this is the id of the form
-$("#loginform,#loginform1,#loginform2").submit(function(e) {
-	var nowurl= location.pathname;
-	var form = $(this);
-	var url = form.attr('action');
-
-	$.ajax({
-		type: "POST",
-		url: url,
-		data: form.serialize(), // serializes the form's elements.
-		success: function(data) {
-			if (data == "成功登入" || data == "已登入過") {
-				$("#closeloginform1").click();
-				$("#closeloginform2").click();
-				$.ajax({
-					type: "POST",
-					url: "/magnetEC/template/nav.jsp",
-					data: null, // serializes the form's elements.
-					success: function(navdata) {
-						$("#nav").html(navdata);
-					}
-				});
-				
-				if (nowurl.includes("users_login.jsp")){
-					window.location.href='users_login_ok.jsp';					
-				}
-			}else{
-				alertify.set({ labels: { ok: "確定", cancel: "取消" } });
-				alertify.alert(data);
-			}
-
-			//alert(data);
-		}
-	});
-
-	e.preventDefault(); // avoid to execute the actual submit of the form.
 });
 
 

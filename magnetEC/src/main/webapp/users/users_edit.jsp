@@ -74,7 +74,7 @@
           <div class="form-text text-center mb-3">為了提供您更完善的服務，請務必輸入正確的資料，謝謝您。</div>
         </div>
         <div class="container mainarea" id="registerpage">
-          <form class="row g-3 position-relative needs-validation" action="users_update?action=update" method="post" novalidate="">
+          <form class="row g-3 position-relative needs-validation" action="users_update?action=update" method="post" novalidate>
             <div class="col-lg-4 position-relative">
               <div class="row">
                 <label class="form-label" for="users_id"><span>帳號</span></label>
@@ -217,7 +217,7 @@
 		  $("#users_id").removeClass("is-invalid");
 		}
 
-	function deletAccout() {
+	$("#deletaccout").click(function(e) {
 			alertify.set({ labels: { ok: "確定", cancel: "取消" } });
 			alertify.confirm("確認刪除帳號: <span style='color: blue; font-weight: 600;'>"+ $("#users_id").val() +"</span> ? <br/>按下確定後，<span style='color: red;'>將不能復原！</span>", function (e) {
 			    if (e) {
@@ -226,7 +226,9 @@
 			        return false;
 			    }
 			});
-		}
+	
+			e.preventDefault(); //忽略原本預設的動作
+		})
 </script>
 <%-- 此頁JS載入結束 --%>
 
