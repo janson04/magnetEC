@@ -26,17 +26,6 @@ public class Product {
 		this.introduction = introduction;
 		this.introHtml = introHtml;
 	}
-
-	public String toString() {
-        return "Product [productId=" + productId + 
-        		", productName=" + productName + 
-        		", category=" + category + 
-        		", price=" + price +
-        		", stock=" + stock +
-        		", imgurl=" + imgurl +
-        		", introHtml=" + introHtml +
-                "]";
-    }
     
     public void setAll(String productId, String productName, String category, int price, int stock, String imgurl,
 			String introduction, String introHtml) {
@@ -113,4 +102,15 @@ public class Product {
 	public void setIntroHtml(String introHtml) {
 		this.introHtml = introHtml;
 	}
+	
+	public String toString() {
+        return "Product [productId=" + productId + 
+        		", productName=" + productName + 
+        		", category=" + category + 
+        		", price=" + price +
+        		", stock=" + stock +
+        		", imgurl=" + imgurl +
+        		", introHtml=" + introHtml +
+                "]";
+    }
 }

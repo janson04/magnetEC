@@ -78,6 +78,7 @@ public class Shoppingcart implements Serializable {
 				+"\tusersId: " + usersId
 				+"\tproduct_Id: " + product_Id
 				+"\tsingleBuynum: " + singleBuynum
-				+"\tcreateDate: " + createDate ;
+				+"\tcreateDate: " + createDate
+				;
 	}
 }

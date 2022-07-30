@@ -16,10 +16,14 @@ public class Corder {
     private String taxnumber;
     private Integer member;
     private Integer sum;
+    private String create_date;
+    
+    public Corder() {
+    };
     
 	public Corder(String corder_id, String cname, String phone, String email, String city, String postcode,
 			String address, String notes, String shippingmethod, String paymethod, String receipt, String taxname,
-			String taxnumber, Integer member, Integer sum) {
+			String taxnumber, Integer member, Integer sum, String create_date) {
 		super();
 		this.corder_id = corder_id;
 		this.cname = cname;
@@ -36,6 +40,7 @@ public class Corder {
 		this.taxnumber = taxnumber;
 		this.member = member;
 		this.sum = sum;
+		this.create_date = create_date;
 	}
 	public String getCorder_id() {
 		return corder_id;
@@ -127,5 +132,30 @@ public class Corder {
 	public void setSum(Integer sum) {
 		this.sum = sum;
 	}
-    
+	public String getCreate_date() {
+		return create_date;
+	}
+	public void setCreate_date(String create_date) {
+		this.create_date = create_date;
+	}
+	
+	public String toString() {
+		return "corder_id: " + corder_id
+				+"\tcname: " + cname
+				+"\tphone: " + phone
+				+"\temail: " + email
+				+"\tcity: " + city
+				+"\tpostcode: " + postcode
+				+"\taddress: " + address
+				+"\tnotes: " + notes
+				+"\tshippingmethod: " + shippingmethod
+				+"\tpaymethod: " + paymethod
+				+"\treceipt: " + receipt
+				+"\ttaxname: " + taxname
+				+"\ttaxnumber: " + taxnumber
+				+"\tmember: " + member
+				+"\tsum: " + sum
+				+"\tcreate_date: " + create_date
+				;
+	}
 }

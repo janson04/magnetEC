@@ -114,7 +114,7 @@ public class UsersLoginServlet extends HttpServlet {
 			UsersService.loadShoppingcart(request);		//20220730新增:合併當前購物車至資料庫，並重新全部讀取出來
 			
 			if ( request.getHeader("Referer").contains("users_login.jsp") ) {
-				response.sendRedirect("/magnetEC/users/users_logout_ok.jsp");
+				response.sendRedirect("/magnetEC/users/users_login_ok.jsp");
 			} else {
 				wr.write("成功登入");		//不能亂改名，前端JS會偵測此名字做動
 			}

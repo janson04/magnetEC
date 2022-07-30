@@ -46,8 +46,8 @@
 	        <h5>
 	          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 	            <ol class="breadcrumb">
-	              <li class="breadcrumb-item"><a href="#">首頁</a></li>
-	              <li class="breadcrumb-item"><a href="#">磁鐵購買</a></li>
+	              <li class="breadcrumb-item"><a href="/magnetEC/index.jsp">首頁</a></li>
+	              <li class="breadcrumb-item"><a href="/magnetEC/product?magnetType=all">磁鐵購買</a></li>
 	              <li class="breadcrumb-item active" aria-current="page">購物車</li>
 	            </ol>
 	          </nav>

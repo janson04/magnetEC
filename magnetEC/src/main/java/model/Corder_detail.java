@@ -94,5 +94,14 @@ public class Corder_detail {
 	public void setSingle_buynum(Integer single_buynum) {
 		this.single_buynum = single_buynum;
 	}
-
+	
+	public String toString() {
+		return "id: " + id
+				+"\tcorder_Id: " + corder_Id
+				+"\tproduct_Id: " + product_Id
+				+"\tproduct_Name: " + product_Name
+				+"\tproduct_price: " + product_price
+				+"\tsingle_buynum: " + single_buynum
+				;
+	}
 }

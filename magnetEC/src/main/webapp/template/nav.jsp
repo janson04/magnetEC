@@ -177,6 +177,7 @@
 					$("#closeloginform2").click();
 					$.ajax({
 						type: "POST",
+						async: false,
 						url: "/magnetEC/template/nav.jsp",
 						data: null,
 						success: function(navdata) {

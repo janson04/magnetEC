@@ -86,7 +86,8 @@ public class CorderServlet extends HttpServlet {
 		String taxnumber = request.getParameter("taxnumber");
 		
 		System.out.println(
-				"users_id: "+users_id	//不一定會有，有登入才有
+				"---CorderServlet:開始 ---"
+				+"\nusers_id: "+users_id	//不一定會有，有登入才有
 				+"\ncname: "+cname
 				+"\nphone: "+phone
 				+"\nemail: "+email
@@ -99,31 +100,41 @@ public class CorderServlet extends HttpServlet {
 				+"\nreceipt: "+receipt
 				+"\ntaxname: "+taxname
 				+"\ntaxnumber: "+taxnumber
-				);
+				+"---CorderServlet:結束 ---");
 		
-		//如果有以下有一項為空值，代表為非法執行，直接導回首頁
+		//如果有以下有一項為空值，代表為非法執行
 		if (	shippingmethod == null || paymethod == null || cname == null || phone == null
 				|| email == null || city == null || postcode == null || address == null
 				|| notes == null || receipt == null || taxname == null || taxnumber == null
-				) {
-			// 跳轉至首頁
-			response.sendRedirect("/magnetEC/index.jsp");
+				) 
+		{
+			//非法執行跳轉至錯誤頁面
+			System.out.println("CorderServlet: 非法執行");
+			response.sendRedirect("cart_error.jsp");
 			return;
 		}
 		
 		//依照規則再次驗證傳入的值
-		if (	shippingmethod.isEmpty() || paymethod.isEmpty() || cname.isEmpty() || email.isEmpty()
-				|| Pattern.matches("^[0][9][0-9]{8}$" , phone)
-				|| Pattern.matches("^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z]+$", email)
+		if (	shippingmethod.isEmpty() || paymethod.isEmpty() || cname.isEmpty()
+				|| !Pattern.matches("^[0][9][0-9]{8}$" , phone)
+				|| (!email.isEmpty() && !Pattern.matches("^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z]+$", email))
 				|| city.isEmpty()
-				|| Pattern.matches("[0-9]{3,6}" , postcode)
+				|| !Pattern.matches("[0-9]{3,6}" , postcode)
 				|| address.isEmpty() || receipt.isEmpty()
-				|| ( "TriplicateInvoices".equals(receipt) && (taxname.isEmpty() || Pattern.matches("^[0-9]{8}$",taxnumber)) )
-				) {
-			response.getWriter().println("驗證成功");
-			response.getWriter().println(user);
+				|| ( "TriplicateInvoices".equals(receipt) && (taxname.isEmpty() || !Pattern.matches("^[0-9]{8}$",taxnumber)) )
+				)
+		{
+			//驗證失敗則跳轉至錯誤頁面
+			System.out.println("CorderServlet: 驗證失敗");
+			response.sendRedirect("cart_error.jsp");
+			return;
+			
 		} else {
-			response.getWriter().println("驗證失敗");
+			//成功驗證，要把訂單資訊輸出至資料庫，並清除購物車
+			
+			
+			request.getRequestDispatcher("cart_complete.jsp").forward(request, response);
+			return;
 		}
 		
 	}
