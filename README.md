@@ -20,7 +20,7 @@ Jaxrs-ri
 前端框架 (JQuery)
   
 
-## **以下是網站的實際截圖**
+## **以下是網站的實際畫面**
 ![image](https://github.com/janson04/magnetEC/blob/master/ScreenShots/magnetEC-view1.png)
 ![image](https://github.com/janson04/magnetEC/blob/master/ScreenShots/magnetEC-view2.png)
 ![image](https://github.com/janson04/magnetEC/blob/master/ScreenShots/magnetEC-view3.png)
