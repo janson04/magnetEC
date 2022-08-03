@@ -23,6 +23,14 @@ section#magnet_type {
   padding: 20px 0px;
   background-image: url(/magnetEC/images/index_bg.jpg);
 }
+
+@media (prefers-color-scheme: dark) {
+	section#magnet_type {
+		background:#333;
+		color:#fff
+	}
+}
+
 section#magnet_type .img_wrap {
   height: 300px;
   overflow: hidden;

@@ -3,6 +3,14 @@ section#left_zone {
   padding: 20px 0px;
   background-image: url("https://www.msmt.com.tw/images/common/index/index_bg.jpg");
 }
+@media (prefers-color-scheme: dark) {
+	section#left_zone {
+		background:#333;
+		color:#fff
+	}
+}
+
+
 section#left_zone .list-group {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
