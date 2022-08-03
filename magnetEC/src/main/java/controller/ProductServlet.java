@@ -44,7 +44,11 @@ public class ProductServlet extends HttpServlet {
 			l = new ProductDaoImpl().queryListforCategory(request.getParameter("magnetType"));
 			
 			//把英文簡稱轉換成全名
-			request.setAttribute("magnetTypeFullName",EnumProductFullName.valueOf(request.getParameter("magnetType")).getFullName());
+			request.setAttribute("magnetTypeFullName",
+						EnumProductFullName.getEnum(request.getParameter("magnetType")) == null ?
+						null :
+						EnumProductFullName.getEnum(request.getParameter("magnetType")).getFullName()
+					);
 		}
 		
 		request.setAttribute("magnetShowListSize",l.size());

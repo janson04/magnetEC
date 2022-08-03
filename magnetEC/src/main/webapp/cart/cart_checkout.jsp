@@ -87,18 +87,13 @@
 	        <div class="col-12 col-md-8 col-lg-6 fs-4 mt-2">
 	            <i class="fas fa-truck">選擇的運送方式：
 		            <div class="fas">
+			            <%  model.EnumShippingName Senum = model.EnumShippingName.getEnum(request.getParameter("transportRadios"));
+			            	if (Senum != null)
+			            		request.setAttribute("transportName", Senum.getName());
+			            %>
 		            	<c:choose>
-		            		<c:when test="${param.transportRadios == 'delivery'}">
-		            			 宅配
-		            		</c:when>
-		            		<c:when test="${param.transportRadios == 'cashondelivery'}">
-		            			 貨到付款
-		            		</c:when>
-		            		<c:when test="${param.transportRadios == 'pick711'}">
-		            			 7-11純取貨
-		            		</c:when>
-		            		<c:when test="${param.transportRadios == 'pickpay711'}">
-		            			 7-11取貨付款
+		            		<c:when test="${not empty requestScope.transportName}">
+		            			 ${requestScope.transportName}
 		            		</c:when>
 		            		<c:otherwise>
 		            			 錯誤的運送方式
@@ -111,15 +106,13 @@
 	        <div class="col-12 col-md-8 col-lg-6 fs-4 mt-2">
 	            <i class="fas fa-money-bill-1-wave">選擇的付款方式：
 	            	<div class="fas">
+	            		<%  model.EnumPayName Penum = model.EnumPayName.getEnum(request.getParameter("payRadios"));
+			            	if (Penum != null)
+			            		request.setAttribute("payName", Penum.getName());
+			            %>
 		            	<c:choose>
-		            		<c:when test="${param.payRadios == 'remittance'}">
-		            			 匯款
-		            		</c:when>
-		            		<c:when test="${param.payRadios == 'creditcard'}">
-		            			 線上刷卡
-		            		</c:when>
-		            		<c:when test="${param.payRadios == 'payondelivery'}">
-		            			 貨到付款
+		            		<c:when test="${not empty requestScope.payName}">
+		            			 ${requestScope.payName}
 		            		</c:when>
 		            		<c:otherwise>
 		            			 錯誤的付款方式
@@ -170,78 +163,22 @@
 	          <tfoot class="fw-bold">
 	            <tr>
 	              <td id="Products_Total" class="text-end" colspan="4">商品金額總計</td>
-	              <td colspan="2">NT$ <span id="subtotal_sum">${ pageScope.subtotal == null ? 0 : pageScope.subtotal }</span></td>
+	              <!-- ${pageScope.subtotal = ShoppingCart.totalAllMoney()} -->
+                  <td colspan="2">NT$ <span id="subtotal_sum">${pageScope.subtotal}</span></td>
 	            </tr>
 	            <tr>
 	              	<td class="text-end" colspan="4">運費</td>
-	                <%
-	                	/*
-				     	// 取出所有Parameter
-				        System.out.println("------開始取出Parameter------");
-				
-				        // 返回包含名稱的字符串對象的Enumeration
-				        // 此request中包含的parameters。
-				        Enumeration paramNames = request.getParameterNames();
-				
-				        // 如果enumeration包含更多的 elements，則讀取下一個(nextElement)繼續取出
-				        while (paramNames.hasMoreElements()) {
-				             String paraName = (String)  paramNames.nextElement();
-				             System.out.print(paraName + ": ");
-				             String[] paramValues =  request.getParameterValues(paraName);
-				             // 當此參數只有一個時
-				             if (paramValues.length == 1) {
-				                 String paramValue = paramValues[0];
-				                 if (paramValue.length() == 0) {
-				                      System.out.println("null");
-				                 } else {
-				                      System.out.println(paramValue);
-				                 }
-				             } else {
-				                 // 當此參數有好幾個值時
-				                 for (int i = 0; i < paramValues.length; i++) {
-				                      System.out.print(paramValues[i]+"\t");
-				                 }
-				                 System.out.println("");
-				             }
-				        }
-				        System.out.println("------結束取出Parameter------");
-			        	*/
-			        
-			        	long transportThreshold = 1000;	//設定運費優惠門檻
+	                <%			        	
+			            String transport = request.getParameter("transportRadios");
+			            
+	                	long subtotal = 0;
+			            if ( pageContext.findAttribute("subtotal") != null) {
+			                subtotal = (int) pageContext.findAttribute("subtotal");
+			            }
 			        	
-			        	String transport = (String) request.getParameter("transportRadios");
-			        	if (transport == null) {
-			        		//如果為空，預設為宅配(delivery)
-			        		transport = "delivery";
-			        	}
-			        	
-			        	long subtotal = 0;
-			        	if ( pageContext.findAttribute("subtotal") != null) {
-			        		subtotal = (long) pageContext.findAttribute("subtotal");
-			        	}
-			        	
-			        	//判斷運費為何
-			       		switch (transport) {
-			                   case "delivery":
-				                   	if (subtotal >= transportThreshold ) {
-				                   		pageContext.setAttribute("transportfee", 0);
-				                   	}else{
-				                   		pageContext.setAttribute("transportfee", 60);
-				                   	}
-				                    //System.out.println("運送方式: delivery(宅配)");
-				                    break;
-			                   case "cashondelivery":
-				                   	if (subtotal >= transportThreshold ) {
-				                   		pageContext.setAttribute("transportfee", 50);
-				                   	}else{
-				                   		pageContext.setAttribute("transportfee", 80);
-				                   	}
-				                    //System.out.println("運送方式: cashondelivery(貨到付款)");
-				                    break;
-			                   default:
-			                	    pageContext.setAttribute("transportfee", 999);
-				                    System.out.println("非宅配或是貨到付款");
-			               }
+			        	//帶入運費方式及商品總金額，回傳運費
+			        	int transportfee = service.ShoppingCartService.transportfee(transport, subtotal);
+			       		pageContext.setAttribute("transportfee", transportfee);
 			        
 			        %>
 			        <td colspan="2">NT$ <span id="transportfee">${ pageScope.transportfee }</span></td>
@@ -258,7 +195,7 @@
 	</section>
 	
 	<!--訂購資訊+發票資訊-->
-      <form id="orderdetail" class="row g-3 position-relative needs-validation" action="CorderSend"
+      <form id="orderdetail" class="row g-3 position-relative needs-validation" action="car_complete"
         method="post" novalidate>
         <section class="mx-2 mt-4">
             <div class="container">
@@ -287,7 +224,7 @@
                     <div class="col-lg-8 position-relative">
 		                    <label class="form-label d-lg-block d-none" for="users_id"><span>　</span></label>
 		                    <div class="form-check d-flex align-items-center" style="line-height: 38px">
-							  <input class="form-check-input" type="checkbox" value="" id="SyncData"  <c:if test="${sessionScope.user == null}">disabled</c:if> >
+							  <input class="form-check-input" type="checkbox" value="true" id="SyncData" name="SyncData"  <c:if test="${sessionScope.user == null}">disabled</c:if> >
 							  <label class="form-check-label" for="SyncData">
 									&nbsp此訂單之資料，同步更新至帳號個人資料
 							  </label>

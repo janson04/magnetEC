@@ -4,7 +4,7 @@
 <%
     // 驗證機制 - 會員專屬畫面
 	// 判斷是否已經登入，沒登入過跳轉至登入畫面
-	if (session.getAttribute("user") == null) {
+	if (! service.UsersService.isLogin(request)) {
 		// 跳轉至登入頁面
 		response.sendRedirect("users_login.jsp");
 		return;
@@ -48,7 +48,7 @@
 	        <a class="list-group-item list-group-item-action d-none" href="users_login.jsp">會員登入</a>
 	        <a class="list-group-item list-group-item-action list-group-item-info">會員資料</a>
 	        <a class="list-group-item list-group-item-action" href="users_changepw.jsp">變更密碼</a>
-	        <a class="list-group-item list-group-item-action" href="">訂單查詢</a>
+	        <a class="list-group-item list-group-item-action" href="users_queryorder">訂單查詢</a>
 			<a class="list-group-item list-group-item-action" href="login.do?action=logout">會員登出</a>
         </div>
       </div>

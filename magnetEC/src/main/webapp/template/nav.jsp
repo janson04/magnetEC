@@ -10,7 +10,7 @@
 %>
 <!--上方導覽列20220618:開始 -->
 <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" id="topnav">
-  <div class="container-fluid"><a class="navbar-brand" href="/magnetEC/index.jsp"><img src="https://www.msmt.com.tw/images/common/logo.png" alt=""/></a>
+  <div class="container-fluid"><a class="navbar-brand m-0" href="/magnetEC/index.jsp"><img src="/magnetEC/images/magnetEC_logo.png" alt=""/></a>
     <div class="collapse navbar-collapse mx-3" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/magnetEC/index.jsp">首頁</a></li>

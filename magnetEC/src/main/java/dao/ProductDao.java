@@ -10,6 +10,7 @@ public interface ProductDao {
 	//R 讀取
 	    List<Product> queryAllList();
 	    List<Product> queryListforCategory(String category);
+	    List<Product> searchKeywords(String... searchKeywords);
 	    Product queryforProductId(String productId);
 	    
 	//U 更新

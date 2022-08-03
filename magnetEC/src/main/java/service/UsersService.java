@@ -72,7 +72,7 @@ public class UsersService {
 	public static void main(String[] args) {
 		//測試: public static String calcMD5(String ss) --開始--
 		System.out.println(System.currentTimeMillis());
-		calSsidMd5("李易展",System.currentTimeMillis());
+		calSsidMd5("李小馬",System.currentTimeMillis());
 		//測試: public static String calcMD5(String ss) --結束--
 	}
 	

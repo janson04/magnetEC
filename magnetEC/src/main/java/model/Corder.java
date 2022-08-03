@@ -1,7 +1,10 @@
 package model;
 
+import java.util.List;
+
 public class Corder {
     private String corder_id;
+    private String users_id;
     private String cname;
     private String phone;
     private String email;
@@ -17,15 +20,17 @@ public class Corder {
     private Integer member;
     private Integer sum;
     private String create_date;
+    private List<Corder_detail> codlist;	//正常不會有值，要自行設進去
     
     public Corder() {
     };
     
-	public Corder(String corder_id, String cname, String phone, String email, String city, String postcode,
+	public Corder(String corder_id,String users_id , String cname, String phone, String email, String city, String postcode,
 			String address, String notes, String shippingmethod, String paymethod, String receipt, String taxname,
 			String taxnumber, Integer member, Integer sum, String create_date) {
 		super();
 		this.corder_id = corder_id;
+		this.users_id = users_id;
 		this.cname = cname;
 		this.phone = phone;
 		this.email = email;
@@ -47,6 +52,12 @@ public class Corder {
 	}
 	public void setCorder_id(String corder_id) {
 		this.corder_id = corder_id;
+	}
+	public String getUsers_id() {
+		return users_id;
+	}
+	public void setUsers_id(String users_id) {
+		this.users_id = users_id;
 	}
 	public String getCname() {
 		return cname;
@@ -138,9 +149,18 @@ public class Corder {
 	public void setCreate_date(String create_date) {
 		this.create_date = create_date;
 	}
-	
+
+	public List<Corder_detail> getCodlist() {
+		return codlist;
+	}
+
+	public void setCodlist(List<Corder_detail> codlist) {
+		this.codlist = codlist;
+	}
+
 	public String toString() {
 		return "corder_id: " + corder_id
+				+"\tusers_id: " + users_id
 				+"\tcname: " + cname
 				+"\tphone: " + phone
 				+"\temail: " + email

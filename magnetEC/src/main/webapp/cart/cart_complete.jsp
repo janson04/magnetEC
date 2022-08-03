@@ -134,43 +134,49 @@
             <div class="container col-10 col-lg-8 text-center lh-lg" id="OrderComplete">
                 <div class="col-10 mx-auto">
                     <span>訂單號碼</span>
-                    <span class="text-primary fs-5" id="shippingmethod">【OD-20220618001】</span><br />
+                    <span class="text-primary fs-5" id="orderId">【${requestScope.order_id}】</span><br />
                     <span>運送方式為</span>
-                    <span class="text-primary fs-5" id="shippingmethod">【貨到付款】</span><br />
+                    <span class="text-primary fs-5" id="shippingmethod">【${requestScope.shippingmethod}】</span><br />
                     <span>付款方式為</span>
-                    <span class="text-primary fs-5" id="paymethod_delivery">【線上刷卡】</span><br />
+                    <span class="text-primary fs-5" id="paymethod">【${requestScope.paymethod}】</span><br />
                     <span>訂單金額為</span>
-                    <span class="text-primary fs-5" id="paymethod_delivery">【NT$ 1,340】</span><br /><span>如選擇線上刷卡者，會自動跳轉至刷卡頁面；</span><br /><span>如選擇匯款者，請按照下方匯款帳號匯款；</span><br /><span>如選擇貨到付款者，當配送時送貨員會跟您收取現金，敬請備妥</span><br /><span>謝謝您的支持！</span>
+                    <span class="text-primary fs-5" id="sum">【NT$ ${requestScope.sum}】</span><br />
+                    <c:if test="${requestScope.paymethod == '線上刷卡'}"><span>您選擇的是線上刷卡，會自動跳轉至刷卡頁面；</span><br /></c:if>
+                    <c:if test="${requestScope.paymethod == '匯款'}"><span>您選擇的是匯款，請按照下方匯款帳號匯款；</span><br /></c:if>
+                    <c:if test="${requestScope.paymethod == '貨到付款'}"><span>您選擇的是貨到付款，當配送時送貨員會跟您收取現金，敬請備妥</span><br /></c:if>
+                    <span>謝謝您的支持！</span>
                 </div>
             </div>
         </div>
     </section>
-    <section class="mx-2 my-4" id="remittance">
-        <div class="container">
-            <div class="container col-10 col-lg-8 text-center lh-lg" id="OrderComplete">
-                <div class="col-10 col-md-6 col-lg-5 mx-auto text-center">
-                    <div class="row text-center">
-                        <div class="col h4 fw-bold">匯款資訊</div>
-                    </div>
-                    <div class="row col">銀行：永豐銀行 (807)</div>
-                    <div class="row col">分行：南內湖分行(1430)</div>
-                    <div class="row col">帳號：143-20-2893595</div>
-                    <div class="row col">戶名：磁鐵實業股份有限公司 　</div>
-                    <div class="row text-center pt-2">
-                        <div class="col fw-bolder">匯款完成請在通知敝司，謝謝😊</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <c:if test="${requestScope.paymethod == '匯款'}">
+	    <section class="mx-2 my-4" id="remittance">
+	        <div class="container">
+	            <div class="container col-10 col-lg-8 text-center lh-lg" id="OrderComplete">
+	                <div class="col-10 col-md-6 col-lg-5 mx-auto text-center">
+	                    <div class="row text-center">
+	                        <div class="col h4 fw-bold">匯款資訊</div>
+	                    </div>
+	                    <div class="row col">銀行：永豐銀行 (807)</div>
+	                    <div class="row col">分行：南內湖分行(1430)</div>
+	                    <div class="row col">帳號：143-20-2893595</div>
+	                    <div class="row col">戶名：磁鐵實業股份有限公司 　</div>
+	                    <div class="row text-center pt-2">
+	                        <div class="col fw-bolder">匯款完成請在通知敝司，謝謝😊</div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </section>
+    </c:if>
     <div class="container">
         <div class="text-center my-3 mx-2">
-            <button class="btn btn-sm btn-primary" onclick="window.location.href='/'"><i class="fas fa-house">
-                    首頁</i></button>
-            <button class="btn btn-sm btn-primary" onclick="window.location.href='/'"><i class="fas fa-magnet">
-                    瀏覽磁鐵</i></button>
-            <button class="btn btn-sm btn-primary" onclick="window.location.href='/'"><i class="fas fa-magnifying-glass">
-                    訂單查詢</i></button>
+            <button class="btn btn-sm btn-primary" onclick="window.location.href='/magnetEC/index.jsp'">
+            <i class="fas fa-house">首頁</i></button>
+            <button class="btn btn-sm btn-primary" onclick="window.location.href='/magnetEC/product?magnetType=all'">
+            <i class="fas fa-magnet">瀏覽磁鐵</i></button>
+            <button class="btn btn-sm btn-primary" onclick="window.location.href='/'">
+            <i class="fas fa-magnifying-glass">訂單查詢</i></button>
         </div>
     </div>
 

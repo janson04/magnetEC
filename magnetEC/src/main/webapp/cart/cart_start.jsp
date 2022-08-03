@@ -79,7 +79,8 @@
       <c:when test="${ShoppingCart.shoppingMapSize() == 0}">
           <div class="row col-12 my-2">
         	  <div class="text-center fs-5 fw-bold">
-        		  您沒有選擇任何商品
+        		  您沒有選擇任何商品<br />
+        		  或操作時間過久已經自動清除紀錄
         	  </div>
           </div>
       </c:when>
@@ -164,7 +165,7 @@
 		</c:choose>
       </div>
       <div class="col-5 text-start col-md-auto">
-        <button class="btn btn-success" onclick="checkout()" <c:if test="${ShoppingCart.shoppingMapSize() == 0}">disabled="disabled"</c:if>>
+        <button class="btn btn-success" onclick="checkout()" <c:if test="${ShoppingCart.shoppingMapSize() == 0}">disabled</c:if>>
           <div class="fas">進行結算 </div><i class="fas fa-chevron-right"></i>
         </button>
       </div>

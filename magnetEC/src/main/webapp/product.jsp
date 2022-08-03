@@ -35,12 +35,12 @@
       <div class="col-3">
         <div class="list-group">
         	<a class="list-group-item list-group-item-action active" aria-current="true">磁鐵購買</a>
-        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='ND'}"> list-group-item-info</c:if>" href="product?magnetType=ND&page=1">1.燒結釹鐵硼</a>
-        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='FE'}"> list-group-item-info</c:if>" href="product?magnetType=FE&page=1">2.鐵氧體磁鐵</a>
-        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='RM'}"> list-group-item-info</c:if>" href="product?magnetType=RM&page=1">3.軟性橡膠磁鐵</a>
-        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='SM'}"> list-group-item-info</c:if>" href="product?magnetType=SM&page=1">4.釤鈷磁鐵</a>
-        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='AL'}"> list-group-item-info</c:if>" href="product?magnetType=AL&page=1">5.鋁鎳鈷磁鐵</a>
-        	<a class="list-group-item list-group-item-action<c:if test="${magnetType=='PM'}"> list-group-item-info</c:if>" href="product?magnetType=PM&page=1">6.塑膠磁鐵</a>
+        	<a class="list-group-item list-group-item-action<c:if test="${param.magnetType=='ND'}"> list-group-item-info</c:if>" href="product?magnetType=ND&page=1">1.燒結釹鐵硼</a>
+        	<a class="list-group-item list-group-item-action<c:if test="${param.magnetType=='FE'}"> list-group-item-info</c:if>" href="product?magnetType=FE&page=1">2.鐵氧體磁鐵</a>
+        	<a class="list-group-item list-group-item-action<c:if test="${param.magnetType=='RM'}"> list-group-item-info</c:if>" href="product?magnetType=RM&page=1">3.軟性橡膠磁鐵</a>
+        	<a class="list-group-item list-group-item-action<c:if test="${param.magnetType=='SM'}"> list-group-item-info</c:if>" href="product?magnetType=SM&page=1">4.釤鈷磁鐵</a>
+        	<a class="list-group-item list-group-item-action<c:if test="${param.magnetType=='AL'}"> list-group-item-info</c:if>" href="product?magnetType=AL&page=1">5.鋁鎳鈷磁鐵</a>
+        	<a class="list-group-item list-group-item-action<c:if test="${param.magnetType=='PM'}"> list-group-item-info</c:if>" href="product?magnetType=PM&page=1">6.塑膠磁鐵</a>
         	<a class="list-group-item list-group-item-action disabled" href="product?magnetType=MQ&page=1">7.黏結釹鐵硼<br />　(尚未開賣)</a>
         </div>
       </div>
@@ -54,7 +54,9 @@
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="index.jsp">首頁</a></li>
                   <c:choose>
-                  	<c:when test="${magnetType == 'all'}"><li class="breadcrumb-item active" aria-current="page">磁鐵購買</li></c:when>
+                  	<c:when test="${param.magnetType == 'all'}">
+                  		<li class="breadcrumb-item active" aria-current="page">磁鐵購買</li>
+                  	</c:when>
                   	<c:otherwise>
                   		<li class="breadcrumb-item" aria-current="page"><a href="product?magnetType=all">磁鐵購買</a></li>
                   		<li class="breadcrumb-item active" aria-current="page">${magnetTypeFullName}</li>

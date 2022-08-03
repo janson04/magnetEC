@@ -18,18 +18,18 @@ public class Shoppingcart implements Serializable {
 	@Column(name="cart_id")
 	private int cartId;
 
-	@Lob
-	@Column(name="create_date")
-	private String createDate;
-
+	@Column(name="users_id")
+	private String usersId;
+	
 	private String product_Id;
 
 	@Column(name="single_buynum")
 	private int singleBuynum;
-
-	@Column(name="users_id")
-	private String usersId;
-
+	
+	@Lob
+	@Column(name="create_date")
+	private String createDate;
+	
 	public Shoppingcart() {
 	}
 

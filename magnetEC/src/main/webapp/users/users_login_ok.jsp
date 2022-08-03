@@ -39,7 +39,7 @@
 	        <a class="list-group-item list-group-item-action d-none" href="users_login.jsp">會員登入</a>
 	        <a class="list-group-item list-group-item-action" href="users_edit.jsp">會員資料</a>
 	        <a class="list-group-item list-group-item-action" href="users_changepw.jsp">變更密碼</a>
-	        <a class="list-group-item list-group-item-action" href="">訂單查詢</a>
+	        <a class="list-group-item list-group-item-action" href="users_queryorder">訂單查詢</a>
 			<a class="list-group-item list-group-item-action" href="login.do?action=logout">會員登出</a>
         </div>
       </div>

@@ -115,10 +115,47 @@ public class ShoppingCartService {
         Iterator<Corder_detail> iterator = productBuyItems.iterator();
         while(iterator.hasNext()){
             Corder_detail od = iterator.next();
-            double money=od.getProduct_price()*od.getSingle_buynum();
+            double money = od.getProduct_price() * od.getSingle_buynum();
             total+=money;
         }
         return total;
+    }
+    
+    //運費計算
+    public static int transportfee(String transport, long subtotal) {
+    	
+    	int transportThreshold = 1000;		//設定運費優惠門檻
+    	
+    	//如果為空，預設為宅配(delivery)
+    	if (transport == null) {
+    		transport = "delivery";
+    	}
+    	
+    	//判斷運費為何
+   		switch (transport) {
+               case "delivery":
+               case "宅配":
+					System.out.println("運送方式: delivery(宅配)");
+					if (subtotal >= transportThreshold ) {
+						return 0;
+					}else{
+						return 60;
+					}
+
+               case "cashondelivery":
+               case "貨到付款":
+            	   System.out.println("運送方式: cashondelivery(貨到付款)");
+                   	if (subtotal >= transportThreshold ) {
+                   		return 50;
+                   	}else{
+                   		return 80;
+                   	}
+
+               default:
+                   System.out.println("非宅配或是貨到付款");
+                   return 10000000;
+           }
+   		
     }
     
     //購物車商品總數量

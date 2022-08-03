@@ -15,4 +15,21 @@ public enum EnumProductFullName {
 	public String getFullName() {
 		return FullName;
 	}
+	
+	//原本使用valueOf來取得，但如果為空值，或是沒有此Enum會跳出Exception(常見是大小寫錯誤)
+    public static EnumProductFullName getEnum(String value) {
+    	//空值處理
+        if (value == null || value.length() < 1) {
+            return null;
+        }
+        
+        //大小寫處理
+        for (EnumProductFullName t : values()) {
+            if (t.name().equalsIgnoreCase(value)) {
+                return t;
+            }
+        }
+        
+        return null;
+    }
 }
