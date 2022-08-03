@@ -33,7 +33,9 @@ public class ProductsDetailServlet extends HttpServlet {
 			//把英文簡稱轉換成全名
 			request.setAttribute("magnetTypeFullName",EnumProductFullName.getEnum(p.getCategory())!=null?EnumProductFullName.getEnum(p.getCategory()).getFullName():null);
 			
-			request.setAttribute("introHtml",p.getIntroHtml().replace("\\n", "\n"));
+			if (p.getIntroHtml() != null) {
+				request.setAttribute("introHtml",p.getIntroHtml().replace("\\n", "\n"));
+			}
 			
 			request.getRequestDispatcher("products_detail.jsp").forward(request, response);
 		}
