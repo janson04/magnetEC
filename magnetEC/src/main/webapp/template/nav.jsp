@@ -172,7 +172,7 @@
 			url: url,
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
-				if (data == "成功登入" || data == "已登入過") {
+				if (data == "成功登入" || data == "重新登入成功") {
 					$("#closeloginform1").click();
 					$("#closeloginform2").click();
 					$.ajax({

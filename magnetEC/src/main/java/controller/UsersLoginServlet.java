@@ -54,7 +54,7 @@ public class UsersLoginServlet extends HttpServlet {
 			if ("login".equals(action)) {
 				UsersService.loadShoppingcart(request);		//20220730新增:合併當前購物車至資料庫，並重新全部讀取出來
 				
-				wr.write("重新登入成功");
+				wr.write("重新登入成功");	//不能亂改名，前端JS會偵測此名字做動
 				return;
 			}
 			
