@@ -29,8 +29,8 @@
         </li>
       </ul>
       <!--搜尋欄-->
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="搜尋" aria-label="Search"/>
+      <form class="d-flex" action="/magnetEC/rest/search" method="GET">
+        <input class="form-control me-2" type="search" name="keywords" placeholder="搜尋" aria-label="Search"/>
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div><span class="me-auto"></span>

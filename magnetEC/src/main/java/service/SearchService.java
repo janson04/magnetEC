@@ -1,7 +1,6 @@
 package service;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -11,26 +10,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+
 
 import dao.ProductDaoImpl;
 import model.Product;
 
 
-@Path("/search/")
+@Path("/")
 public class SearchService {
 	@Context private HttpServletRequest request;     //宣告 HttpServletRequest
 	@Context private HttpServletResponse response;   //宣告 HttpServletResponse
 	
 	@GET
-	@Path("/p={searchKeywords}")
-    @Produces(MediaType.TEXT_HTML)
-    public Response searchKeywords(@PathParam("searchKeywords") String keywords) throws URISyntaxException {
+	@Path("/search")
+    //@Produces(MediaType.TEXT_HTML)
+	//@Path("/{searchKeywords}")
+    //public void searchKeywords(@PathParam("searchKeywords") String keywords) throws IOException, ServletException {
+	public void searchKeywords() throws IOException, ServletException {
 		String[] searchKeywords = new String[] {};
+		String keywords = request.getParameter("keywords");
+		
 		if (keywords.length() > 0) {
 			searchKeywords = keywords.split(" ");
 			System.out.println(searchKeywords);
@@ -41,20 +41,25 @@ public class SearchService {
 			System.out.println(p.getProductName());
 		}
 		
-		//把英文簡稱轉換成全名
-		request.setAttribute("magnetTypeFullName","搜尋");
+		//判斷Parameter.page，沒給就是1
+		if(request.getParameter("page") == null || request.getParameter("page").equals("0")) {
+			request.setAttribute("page","1");
+		}else {
+			request.setAttribute("page",request.getParameter("page"));
+		}
+		
+		request.setAttribute("magnetTypeFullName","搜尋【"+keywords+"】");
 		request.setAttribute("magnetShowListSize",l.size());
 		request.setAttribute("magnetShowMaxPage",Math.ceil(l.size()/8.0));
 		request.setAttribute("magnetShowList", l);
+		request.setAttribute("pagelink", "/magnetEC/rest/search?keywords=" + keywords + "&");
 		
 		//Servlet寫法
-		//request.getRequestDispatcher("/magnetEC/product.jsp").forward(request, response);
+		request.getRequestDispatcher("../product.jsp").forward(request, response);
 		
-		Response response = Response.ok(new URI("/magnetEC/product.jsp")).build();
-		System.out.println(request.getRequestURI());
-        System.out.println(response.getStatus());
-        
-        return response;
+		//RESTful回傳JSON等的寫法
+//        Response resp = Response.ok(new URI("http://localhost:8090/magnetEC/test.jsp")).build();
+//        return resp;
     }
 	
 }

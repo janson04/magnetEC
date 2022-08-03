@@ -38,7 +38,7 @@ public class ProductServlet extends HttpServlet {
 			request.setAttribute("magnetType","all");
 			l = new ProductDaoImpl().queryAllList();
 			
-			request.setAttribute("magnetTypeFullName","全部");
+			request.setAttribute("magnetTypeFullName","全部磁鐵");
 		}else {
 			request.setAttribute("magnetType",request.getParameter("magnetType"));
 			l = new ProductDaoImpl().queryListforCategory(request.getParameter("magnetType"));
@@ -54,6 +54,7 @@ public class ProductServlet extends HttpServlet {
 		request.setAttribute("magnetShowListSize",l.size());
 		request.setAttribute("magnetShowMaxPage",Math.ceil(l.size()/8.0));
 		request.setAttribute("magnetShowList", l);
+		request.setAttribute("pagelink", "/magnetEC/product?magnetType=" + request.getParameter("magnetType") + "&");
 		if(request.getParameter("magnetType") == null || request.getParameter("magnetType").equalsIgnoreCase("all")) {
 			request.getRequestDispatcher("product.jsp?magnetType=all").forward(request, response);
 		}else {
