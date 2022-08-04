@@ -12,7 +12,7 @@ Java全端職訓班上課時數共計480小時
   
 ## 使用技術
 > Java  
-Spring(準備中)
+Spring(準備中)  
 MySQL  
 JSP  
 Servlet  
